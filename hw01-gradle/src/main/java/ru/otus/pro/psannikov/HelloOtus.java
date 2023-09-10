@@ -8,7 +8,7 @@ public class HelloOtus {
         System.out.println("Use Joiner from Guava for concat array data, sep |, skip Null");
         System.out.println(Joiner.on("|")
                 .skipNulls()
-                .join(Arrays.asList(1,null,true,"sdf",3f,5d,null,'c')));
+                .join(Arrays.asList(1, null, true, "sdf", 3f, 5d, null, 'c')));
     }
 
 }
