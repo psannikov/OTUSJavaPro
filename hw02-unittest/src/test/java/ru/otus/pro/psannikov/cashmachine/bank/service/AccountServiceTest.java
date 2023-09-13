@@ -11,8 +11,7 @@ import ru.otus.pro.psannikov.cashmachine.bank.service.impl.AccountServiceImpl;
 
 import java.math.BigDecimal;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.*;
 
@@ -24,6 +23,7 @@ public class AccountServiceTest {
     AccountServiceImpl accountServiceImpl;
     BigDecimal initialAmount;
     Long id;
+    Account testAccount;
 
     @BeforeEach
     void init() {
@@ -31,15 +31,15 @@ public class AccountServiceTest {
         id = 1L;
         accountDao = mock(AccountDao.class);
         accountServiceImpl = new AccountServiceImpl(accountDao);
+        testAccount = new Account(id, initialAmount);
     }
 
     @Test
     void createAccountMock() {
-        Account testAccount = new Account(1L, initialAmount);
         when(accountDao.saveAccount(any(Account.class))).thenReturn(testAccount);
         Account createdAccount = accountServiceImpl.createAccount(initialAmount);
         assertNotNull(createdAccount);
-        assertEquals(1L, createdAccount.getId());
+        assertEquals(id, createdAccount.getId());
         assertEquals(initialAmount, createdAccount.getAmount());
     }
 
@@ -56,21 +56,34 @@ public class AccountServiceTest {
     @Test
     void addSum() {
         BigDecimal amountToAdd = BigDecimal.valueOf(25);
-        Account testAccount = new Account(1L, initialAmount);
         when(accountDao.getAccount(id)).thenReturn(testAccount);
         BigDecimal amountAfterAdd = accountServiceImpl.putMoney(id, amountToAdd);
         assertEquals(initialAmount.add(amountToAdd), amountAfterAdd);
     }
 
     @Test
-    void getSum() {
+    void getSumSuccess() {
+        BigDecimal amountToSub = BigDecimal.valueOf(25);
+        when(accountDao.getAccount(id)).thenReturn(testAccount);
+        BigDecimal amountAfterSub = accountServiceImpl.getMoney(id, amountToSub);
+        assertEquals(initialAmount.subtract(amountToSub), amountAfterSub);
+    }
+    @Test
+    void getSumError() {
+        BigDecimal amountToSub = BigDecimal.valueOf(125);
+        when(accountDao.getAccount(id)).thenReturn(testAccount);
+        assertThrows(IllegalArgumentException.class, () -> {accountServiceImpl.getMoney(id, amountToSub);});
     }
 
     @Test
     void getAccount() {
+        when(accountDao.getAccount(id)).thenReturn(testAccount);
+        assertEquals(testAccount, accountServiceImpl.getAccount(id));
     }
 
     @Test
     void checkBalance() {
+        when(accountDao.getAccount(id)).thenReturn(testAccount);
+        assertEquals(initialAmount, accountServiceImpl.checkBalance(id));
     }
 }
