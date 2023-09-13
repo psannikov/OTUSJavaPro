@@ -1,15 +1,15 @@
-package ru.otus.pro.psannikov;
+package ru.otus.pro.psannikov.hw03_generic;
 
 public class MainApp {
     public static void main(String[] args) {
         Apple apple1 = new Apple();
         Apple apple2 = new Apple();
         Orange orange1 = new Orange();
-        Box<Fruit> boxFruit1 = new Box<>(true,apple1,apple2);
+        Box<Fruit> boxFruit1 = new Box<>(apple1,apple2);
         System.out.println("=".repeat(30));
         System.out.println("Contents of boxFruit1: " + boxFruit1.getFruits());
         System.out.println("Weight of boxFruit1 = " + boxFruit1.weight());
-        Box<Fruit> boxFruit2 = new Box<>(false);
+        Box<Fruit> boxFruit2 = new Box<>();
         System.out.println("Contents of boxFruit2: " + boxFruit2.getFruits());
         System.out.println("Weight of boxFruit2 = " + boxFruit2.weight());
         System.out.println("Comparison of boxFruit1 and boxFruit2 boxes = " + boxFruit1.compare(boxFruit2));
@@ -20,11 +20,11 @@ public class MainApp {
         System.out.println("Weight of boxFruit2 box after transfer = " + boxFruit2.weight());
         System.out.println();
         System.out.println("=".repeat(30));
-        Box<Apple> boxApple1 = new Box<>(false);
+        Box<Apple> boxApple1 = new Box<>();
         boxApple1.addFruits(apple1);
         System.out.println("Contents of boxApple1: " + boxApple1.getFruits());
         System.out.println("Weight of boxApple1 = " + boxApple1.weight());
-        Box<Apple> boxApple2 = new Box<>(false);
+        Box<Apple> boxApple2 = new Box<>();
         boxApple2.addFruits(apple2);
         System.out.println("Contents of boxApple2: " + boxApple2.getFruits());
         System.out.println("Weight of boxApple2 = " + boxApple2.weight());
@@ -36,7 +36,7 @@ public class MainApp {
         System.out.println("Weight of boxApple2 after transfer = " + boxApple2.weight());
         System.out.println();
         System.out.println("=".repeat(30));
-        Box<Orange> boxOrange1 = new Box<>(false);
+        Box<Orange> boxOrange1 = new Box<>();
         boxOrange1.addFruits(orange1);
         System.out.println("Contents of boxOrange1: " + boxOrange1.getFruits());
         System.out.println("Weight of boxOrange1 = " + boxOrange1.weight());
@@ -48,10 +48,5 @@ public class MainApp {
         boxFruit1.addFruits(apple1);
         System.out.println("Contents of boxFruit1 (MixedBox) after adding an apple: " + boxFruit1.getFruits());
         System.out.println("Weight of boxFruit1 = " + boxFruit1.weight());
-        try {boxFruit2.addFruits(orange1);}
-        catch (RuntimeException e) {
-            System.out.println("Caught the exception: " + e.getMessage());
-        }
-        System.out.println("Contents of boxFruit2(NoMixedBox) after attempting to add an orange: " + boxFruit2.getFruits());
     }
 }
