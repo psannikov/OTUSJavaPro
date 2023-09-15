@@ -1,3 +1,4 @@
 rootProject.name = "otus-pro-homeworks"
-include("hw04-gc")
 include("hw01-gradle")
+include("hw03-generic")
+include("hw04-gc")
