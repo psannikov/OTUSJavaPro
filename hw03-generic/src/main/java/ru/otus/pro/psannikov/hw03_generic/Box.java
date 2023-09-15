@@ -36,7 +36,9 @@ public class Box <T extends Fruit>{
     }
 
     public void pour(Box <T> otherBox) {
-        if (otherBox == null || this == otherBox) {} else {
+        if (otherBox == null || this == otherBox) {
+            return;
+        } else {
             for (T fruit : this.fruits) {
                 otherBox.addFruits(fruit);
             }
