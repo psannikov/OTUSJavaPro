@@ -2,31 +2,28 @@ package ru.otus.pro.psannikov.hw05.annotations;
 
 import ru.otus.pro.psannikov.hw05.annotations.annotation.AfterMethod;
 import ru.otus.pro.psannikov.hw05.annotations.annotation.BeforeMethod;
-import ru.otus.pro.psannikov.hw05.annotations.annotation.TestMethod;
+import ru.otus.pro.psannikov.hw05.annotations.annotation.Test;
 
 public class CalculatorTest {
     Calculator calculator = new Calculator();
-    private int a;
-    private int b;
     @BeforeMethod
     public void beforeTest () {
-        a = 2;
-        b = 3;
+        System.out.println("Начинаем тест");
     }
     @AfterMethod
     public void afterTest () {
-
+        System.out.println("Завершаем тест");
     }
-    @TestMethod
+    @Test
     public void testSumm (int a, int b) {
         if (!(Calculator.summ(a,b) == a + b)) {
-            throw new IllegalArgumentException("Некорректный результат расчетов");
+            throw new IllegalArgumentException("Некорректный результат расчетов сложения");
         }
     }
-    @TestMethod
-    public void testMultiplication () {
+    @Test
+    public void testMultiplication (int a, int b) {
         if (!(Calculator.summ(a,b) == a * b)) {
-            throw new IllegalArgumentException("Некорректный результат расчетов");
+            throw new IllegalArgumentException("Некорректный результат расчетов умножения");
         }
     }
 

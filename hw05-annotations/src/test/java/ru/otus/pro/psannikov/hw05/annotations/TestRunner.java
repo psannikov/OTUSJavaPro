@@ -2,18 +2,49 @@ package ru.otus.pro.psannikov.hw05.annotations;
 
 import ru.otus.pro.psannikov.hw05.annotations.annotation.AfterMethod;
 import ru.otus.pro.psannikov.hw05.annotations.annotation.BeforeMethod;
-import ru.otus.pro.psannikov.hw05.annotations.annotation.TestMethod;
+import ru.otus.pro.psannikov.hw05.annotations.annotation.Test;
+
+import java.lang.annotation.Annotation;
+import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.List;
 
 public class TestRunner {
     public static void main(String[] args) {
-        CalculatorTest calculatorTest = new CalculatorTest();
-//        calculatorTest.testSumm(2,3);
-        Class<CalculatorTest> cls = (Class<CalculatorTest>) calculatorTest.getClass();
-        System.out.println(cls.getName());
+        List<Method> befoMethods = new ArrayList<>();
+        List<Method> afterMethods = new ArrayList<>();
+        List<Method> testMethods = new ArrayList<>();
         System.out.println("=".repeat(30));
-        AfterMethod annAfter =cls.getAnnotation(AfterMethod.class);
-        BeforeMethod annBefore =cls.getAnnotation(BeforeMethod.class);
-        TestMethod annTest = cls.getAnnotation(TestMethod.class);
-        System.out.println(annTest);
+        Class<?> clazz = CalculatorTest.class;
+        Method[] methods = clazz.getDeclaredMethods();
+        for (Method method : methods) {
+            Annotation[] annotations = method.getAnnotations();
+            for (Annotation annotation : annotations) {
+                if (annotation instanceof BeforeMethod) {
+                    befoMethods.add(method);
+                } else if (annotation instanceof AfterMethod) {
+                    afterMethods.add(method);
+                } else if (annotation instanceof Test) {
+                    testMethods.add(method);
+                }
+            }
+        }
+        List<Method> intersection = new ArrayList<>();
+        for (Method method : befoMethods) {
+            if (afterMethods.contains(method)) {
+                intersection.add(method);
+            }
+        }
+        for (Method method : befoMethods) {
+            if (testMethods.contains(method)) {
+                intersection.add(method);
+            }
+        }
+        for (Method method : testMethods) {
+            if (afterMethods.contains(method)) {
+                intersection.add(method);
+            }
+        }
+        System.out.println(intersection);
     }
 }
