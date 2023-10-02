@@ -56,26 +56,27 @@ public class TestRunner {
 
     private void runAllTest() {
         if (!testMethods.isEmpty()) {
-                for (Method testMethod : testMethods) {
-                    try {
+            for (Method testMethod : testMethods) {
+                try {
                     for (Method beforeMethod : befoMethods) {
                         beforeMethod.invoke(calculatorTest);
                     }
                     testMethod.invoke(calculatorTest);
                     successfulTest.add(testMethod);
-                }
-             catch (Exception e) {
+                } catch (Exception e) {
                     System.out.println(e.getMessage());
-                unSuccessfulTest.add(testMethod);
-                }}
+                    unSuccessfulTest.add(testMethod);
+                }
+            }
             try {
-            for (Method afterMethod : afterMethods) {
-                afterMethod.invoke(calculatorTest);
-            } } catch (Exception e) {
+                for (Method afterMethod : afterMethods) {
+                    afterMethod.invoke(calculatorTest);
+                }
+            } catch (Exception e) {
                 System.out.println(e.getMessage());
             }
-            }
         }
+    }
 
     public void unitTestRunner() {
         try {
