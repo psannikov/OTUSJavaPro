@@ -11,9 +11,9 @@ import java.util.List;
 
 public class CashMachineServiceImpl implements CashMachineService {
 
-    private MoneyBoxService moneyBoxService;
+    private final MoneyBoxService moneyBoxService;
 
-    public CashMachineServiceImpl(final MoneyBoxService moneyBoxService) {
+    public CashMachineServiceImpl(MoneyBoxService moneyBoxService) {
         this.moneyBoxService = moneyBoxService;
     }
 
