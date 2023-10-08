@@ -10,28 +10,25 @@ import java.util.List;
 
 
 public class MoneyBoxServiceImpl implements MoneyBoxService {
-    private Bill bill = Bill.builder().build();
-    private int valNote100 = 100;
-    private int valNote500 = 500;
-    private int valNote1000 = 1000;
-    private int valNote5000 = 5000;
-
-
+    private Bill bill;
+    public MoneyBoxServiceImpl(Bill bill) {
+        this.bill = bill;
+    };
     @Override
     public int checkSum(MoneyBox moneyBox) {
-        return moneyBox.getNote1() * valNote100 + moneyBox.getNote2() * valNote500 + moneyBox.getNote3() * valNote1000 + moneyBox.getNote4() * valNote5000;
+        return moneyBox.getNote1() * bill.getValNote1() + moneyBox.getNote2() * bill.getValNote2() + moneyBox.getNote3() * bill.getValNote3() + moneyBox.getNote4() * bill.getValNote4();
     }
 
     @Override
-    public void putMoney(MoneyBox moneyBox, int note100, int note500, int note1000, int note5000) {
+    public void putMoney(MoneyBox moneyBox, int note1, int note2, int note3, int note4) {
         if (moneyBox == null) {
             throw new IllegalStateException("No money box");
         }
 
-        moneyBox.setNote1(moneyBox.getNote1() + note100);
-        moneyBox.setNote2(moneyBox.getNote2() + note500);
-        moneyBox.setNote3(moneyBox.getNote3() + note1000);
-        moneyBox.setNote4(moneyBox.getNote4() + note5000);
+        moneyBox.setNote1(moneyBox.getNote1() + note1);
+        moneyBox.setNote2(moneyBox.getNote2() + note2);
+        moneyBox.setNote3(moneyBox.getNote3() + note3);
+        moneyBox.setNote4(moneyBox.getNote4() + note4);
     }
 
     @Override
@@ -42,54 +39,54 @@ public class MoneyBoxServiceImpl implements MoneyBoxService {
             throw new IllegalStateException("Not enough money");
         }
 
-        if (sum % valNote100 != 0) {
+        if (sum % bill.getValNote1() != 0) {
             throw new IllegalStateException("Can't charge the required sum");
         }
 
         int chargedNotes = 0;
         int requiredNotes = 0;
 
-        if (sum >= valNote5000) {
-            requiredNotes = sum / valNote5000;
+        if (sum >= bill.getValNote4()) {
+            requiredNotes = sum / bill.getValNote4();
             if (requiredNotes <= moneyBox.getNote4()) {
                 chargedNotes = requiredNotes;
             } else {
                 chargedNotes = moneyBox.getNote4();
             }
-            sum -= chargedNotes * valNote5000;
+            sum -= chargedNotes * bill.getValNote4();
             result.set(0, chargedNotes);
         }
 
-        if (sum >= valNote1000) {
-            requiredNotes = sum / valNote1000;
+        if (sum >= bill.getValNote3()) {
+            requiredNotes = sum / bill.getValNote3();
             if (requiredNotes <= moneyBox.getNote3()) {
                 chargedNotes = requiredNotes;
             } else {
                 chargedNotes = moneyBox.getNote3();
             }
-            sum -= chargedNotes * valNote1000;
+            sum -= chargedNotes * bill.getValNote3();
             result.set(1, chargedNotes);
         }
 
-        if (sum >= valNote500) {
-            requiredNotes = sum / valNote500;
+        if (sum >= bill.getValNote2()) {
+            requiredNotes = sum / bill.getValNote2();
             if (requiredNotes <= moneyBox.getNote2()) {
                 chargedNotes = requiredNotes;
             } else {
                 chargedNotes = moneyBox.getNote2();
             }
-            sum -= chargedNotes * valNote500;
+            sum -= chargedNotes * bill.getValNote2();
             result.set(2, chargedNotes);
         }
 
-        if (sum >= valNote100) {
-            requiredNotes = sum / valNote100;
+        if (sum >= bill.getValNote1()) {
+            requiredNotes = sum / bill.getValNote1();
             if (requiredNotes <= moneyBox.getNote1()) {
                 chargedNotes = requiredNotes;
             } else {
                 chargedNotes = moneyBox.getNote1();
             }
-            sum -= chargedNotes * valNote100;
+            sum -= chargedNotes * bill.getValNote1();
             result.set(3, chargedNotes);
         }
 

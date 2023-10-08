@@ -1,5 +1,6 @@
 package ru.otus.pro.psannikov.hw06.solid;
 
+import ru.otus.pro.psannikov.hw06.solid.service.Bill;
 import ru.otus.pro.psannikov.hw06.solid.service.CashMachineService;
 import ru.otus.pro.psannikov.hw06.solid.service.MoneyBoxService;
 import ru.otus.pro.psannikov.hw06.solid.service.impl.CashMachineServiceImpl;
@@ -12,9 +13,10 @@ import java.util.Arrays;
 public class Main {
 
     public static void main(String[] args) {
+        Bill bill = new Bill("Рубль", 100, 500, 1000, 5000);
         MoneyBox moneyBox = new MoneyBox();
         CashMachine cashMachine = new CashMachine(moneyBox);
-        MoneyBoxService moneyBoxService = new MoneyBoxServiceImpl();
+        MoneyBoxService moneyBoxService = new MoneyBoxServiceImpl(bill);
         BigDecimal amountToGet = BigDecimal.valueOf(44000);
         BigDecimal amountToGetBigger = BigDecimal.valueOf(440000000);
         BigDecimal amountToGetIllegal = BigDecimal.valueOf(159);
