@@ -1,6 +1,7 @@
 package ru.otus.pro.psannikov.hw06.solid.service.impl;
 
 import ru.otus.pro.psannikov.hw06.solid.MoneyBox;
+import ru.otus.pro.psannikov.hw06.solid.service.Bill;
 import ru.otus.pro.psannikov.hw06.solid.service.MoneyBoxService;
 
 import java.util.ArrayList;
@@ -9,7 +10,7 @@ import java.util.List;
 
 
 public class MoneyBoxServiceImpl implements MoneyBoxService {
-    private Bill bill =
+    private Bill bill = Bill.builder().build();
     private int valNote100 = 100;
     private int valNote500 = 500;
     private int valNote1000 = 1000;
