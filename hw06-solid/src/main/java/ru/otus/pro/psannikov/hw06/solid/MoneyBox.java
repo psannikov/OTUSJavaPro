@@ -1,51 +1,51 @@
 package ru.otus.pro.psannikov.hw06.solid;
 
 public class MoneyBox {
-    private int note100;
-    private int note500;
-    private int note1000;
-    private int note5000;
+    private int note1;
+    private int note2;
+    private int note3;
+    private int note4;
 
     public MoneyBox() {
         this(1000, 1000, 1000, 1000);
     }
 
-    public MoneyBox(int note100, int note500, int note1000, int note5000) {
-        this.note100 = note100;
-        this.note500 = note500;
-        this.note1000 = note1000;
-        this.note5000 = note5000;
+    public MoneyBox(int note1, int note2, int note3, int note4) {
+        this.note1 = note1;
+        this.note2 = note2;
+        this.note3 = note3;
+        this.note4 = note4;
     }
 
-    public int getNote100() {
-        return note100;
+    public int getNote1() {
+        return note1;
     }
 
-    public void setNote100(int note100) {
-        this.note100 = note100;
+    public void setNote1(int note1) {
+        this.note1 = note1;
     }
 
-    public int getNote500() {
-        return note500;
+    public int getNote2() {
+        return note2;
     }
 
-    public void setNote500(int note500) {
-        this.note500 = note500;
+    public void setNote2(int note2) {
+        this.note2 = note2;
     }
 
-    public int getNote1000() {
-        return note1000;
+    public int getNote3() {
+        return note3;
     }
 
-    public void setNote1000(int note1000) {
-        this.note1000 = note1000;
+    public void setNote3(int note3) {
+        this.note3 = note3;
     }
 
-    public int getNote5000() {
-        return note5000;
+    public int getNote4() {
+        return note4;
     }
 
-    public void setNote5000(int note5000) {
-        this.note5000 = note5000;
+    public void setNote4(int note4) {
+        this.note4 = note4;
     }
 }
