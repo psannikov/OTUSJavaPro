@@ -1,7 +1,7 @@
 package ru.otus.pro.psannikov.hw06.solid.service.impl;
 
-import ru.otus.pro.psannikov.hw06.solid.MoneyBox;
-import ru.otus.pro.psannikov.hw06.solid.service.Bill;
+import ru.otus.pro.psannikov.hw06.solid.domain.MoneyBox;
+import ru.otus.pro.psannikov.hw06.solid.domain.Bill;
 import ru.otus.pro.psannikov.hw06.solid.service.MoneyBoxService;
 
 import java.util.ArrayList;
@@ -16,19 +16,25 @@ public class MoneyBoxServiceImpl implements MoneyBoxService {
     };
     @Override
     public int checkSum(MoneyBox moneyBox) {
-        return moneyBox.getNote1() * bill.getValNote1() + moneyBox.getNote2() * bill.getValNote2() + moneyBox.getNote3() * bill.getValNote3() + moneyBox.getNote4() * bill.getValNote4();
+        return moneyBox.getNotes().get(0) * bill.getValNotes().get(0)
+                + moneyBox.getNotes().get(1) * bill.getValNotes().get(1)
+                + moneyBox.getNotes().get(2) * bill.getValNotes().get(2)
+                + moneyBox.getNotes().get(3) * bill.getValNotes().get(3);
     }
 
     @Override
-    public void putMoney(MoneyBox moneyBox, int note1, int note2, int note3, int note4) {
+    public void putMoney(MoneyBox moneyBox, List<Integer> notes) {
+        int note1 = notes.get(0);
+        int note2 = notes.get(1);
+        int note3 = notes.get(2);
+        int note4 = notes.get(3);
         if (moneyBox == null) {
             throw new IllegalStateException("No money box");
         }
-
-        moneyBox.setNote1(moneyBox.getNote1() + note1);
-        moneyBox.setNote2(moneyBox.getNote2() + note2);
-        moneyBox.setNote3(moneyBox.getNote3() + note3);
-        moneyBox.setNote4(moneyBox.getNote4() + note4);
+        moneyBox.setNotes(0, moneyBox.getNotes().get(0) + note1);
+        moneyBox.setNotes(1, moneyBox.getNotes().get(1) + note2);
+        moneyBox.setNotes(2, moneyBox.getNotes().get(2) + note3);
+        moneyBox.setNotes(3, moneyBox.getNotes().get(3) + note4);
     }
 
     @Override
@@ -39,65 +45,30 @@ public class MoneyBoxServiceImpl implements MoneyBoxService {
             throw new IllegalStateException("Not enough money");
         }
 
-        if (sum % bill.getValNote1() != 0) {
+        if (sum % bill.getValNotes().get(0) != 0) {
             throw new IllegalStateException("Can't charge the required sum");
         }
 
         int chargedNotes = 0;
         int requiredNotes = 0;
 
-        if (sum >= bill.getValNote4()) {
-            requiredNotes = sum / bill.getValNote4();
-            if (requiredNotes <= moneyBox.getNote4()) {
-                chargedNotes = requiredNotes;
-            } else {
-                chargedNotes = moneyBox.getNote4();
+        for (int i = bill.getValNotes().size() - 1; i >= 0; i--) {
+            if (sum >= bill.getValNotes().get(i)) {
+                requiredNotes = sum / bill.getValNotes().get(i);
+                if (requiredNotes <= moneyBox.getNotes().get(i)) {
+                    chargedNotes = requiredNotes;
+                } else {
+                    chargedNotes = moneyBox.getNotes().get(i);
+                }
+                sum -= chargedNotes * bill.getValNotes().get(i);
+                result.set(i, chargedNotes);
             }
-            sum -= chargedNotes * bill.getValNote4();
-            result.set(0, chargedNotes);
-        }
-
-        if (sum >= bill.getValNote3()) {
-            requiredNotes = sum / bill.getValNote3();
-            if (requiredNotes <= moneyBox.getNote3()) {
-                chargedNotes = requiredNotes;
-            } else {
-                chargedNotes = moneyBox.getNote3();
-            }
-            sum -= chargedNotes * bill.getValNote3();
-            result.set(1, chargedNotes);
-        }
-
-        if (sum >= bill.getValNote2()) {
-            requiredNotes = sum / bill.getValNote2();
-            if (requiredNotes <= moneyBox.getNote2()) {
-                chargedNotes = requiredNotes;
-            } else {
-                chargedNotes = moneyBox.getNote2();
-            }
-            sum -= chargedNotes * bill.getValNote2();
-            result.set(2, chargedNotes);
-        }
-
-        if (sum >= bill.getValNote1()) {
-            requiredNotes = sum / bill.getValNote1();
-            if (requiredNotes <= moneyBox.getNote1()) {
-                chargedNotes = requiredNotes;
-            } else {
-                chargedNotes = moneyBox.getNote1();
-            }
-            sum -= chargedNotes * bill.getValNote1();
-            result.set(3, chargedNotes);
+            moneyBox.setNotes(i,moneyBox.getNotes().get(i) - result.get(i));
         }
 
         if (sum > 0) {
             throw new IllegalStateException("Not enough notes");
         }
-
-        moneyBox.setNote4(moneyBox.getNote4() - result.get(0));
-        moneyBox.setNote3(moneyBox.getNote3() - result.get(1));
-        moneyBox.setNote2(moneyBox.getNote2() - result.get(2));
-        moneyBox.setNote1(moneyBox.getNote1() - result.get(3));
 
         return result;
     }

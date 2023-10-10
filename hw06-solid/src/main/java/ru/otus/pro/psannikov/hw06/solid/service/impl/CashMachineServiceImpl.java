@@ -1,6 +1,6 @@
 package ru.otus.pro.psannikov.hw06.solid.service.impl;
 
-import ru.otus.pro.psannikov.hw06.solid.CashMachine;
+import ru.otus.pro.psannikov.hw06.solid.domain.CashMachine;
 import ru.otus.pro.psannikov.hw06.solid.service.CashMachineService;
 import ru.otus.pro.psannikov.hw06.solid.service.MoneyBoxService;
 
@@ -32,6 +32,6 @@ public class CashMachineServiceImpl implements CashMachineService {
         for (int i = 0; i < 4 - arrangedNotes.size(); i ++) {
             arrangedNotes.add(0);
         }
-        moneyBoxService.putMoney(machine.getMoneyBox(), arrangedNotes.get(3), arrangedNotes.get(2), arrangedNotes.get(1), arrangedNotes.get(0));
+        moneyBoxService.putMoney(machine.getMoneyBox(), arrangedNotes);
     }
 }

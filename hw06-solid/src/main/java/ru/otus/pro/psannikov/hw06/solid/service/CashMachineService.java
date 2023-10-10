@@ -1,6 +1,6 @@
 package ru.otus.pro.psannikov.hw06.solid.service;
 
-import ru.otus.pro.psannikov.hw06.solid.CashMachine;
+import ru.otus.pro.psannikov.hw06.solid.domain.CashMachine;
 
 import java.math.BigDecimal;
 import java.util.List;
