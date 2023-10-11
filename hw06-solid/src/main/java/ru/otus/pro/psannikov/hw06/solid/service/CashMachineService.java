@@ -9,5 +9,4 @@ public interface CashMachineService {
     List<Integer> getMoney(CashMachine machine, BigDecimal amount);
 
     void putMoney(CashMachine machine, List<Integer> notes);
-
 }

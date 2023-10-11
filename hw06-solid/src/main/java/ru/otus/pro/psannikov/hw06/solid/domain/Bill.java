@@ -5,6 +5,7 @@ import java.util.List;
 public class Bill {
     private final String name;
     private List<Integer> valNotes;
+
     public Bill(String name, List<Integer> valNotes) {
         this.name = name;
         this.valNotes = valNotes;

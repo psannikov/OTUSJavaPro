@@ -9,16 +9,17 @@ import ru.otus.pro.psannikov.hw06.solid.service.impl.CashMachineServiceImpl;
 import ru.otus.pro.psannikov.hw06.solid.service.impl.MoneyBoxServiceImpl;
 
 import java.math.BigDecimal;
-import java.util.List;
 import java.util.Arrays;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Main {
 
     public static void main(String[] args) {
+        Logger logger  = Logger.getLogger(Main.class.getName());
         List<Integer> defaultCountOfNotes = Arrays.asList(1000, 1000, 1000, 1000);
         BigDecimal amountToGet = BigDecimal.valueOf(44000);
-        BigDecimal amountToGetBigger = BigDecimal.valueOf(440000000);
-        BigDecimal amountToGetIllegal = BigDecimal.valueOf(159);
         BigDecimal amountToPut = BigDecimal.valueOf(400);
         List<Integer> notesToPut = Arrays.asList(0, 0, 0, 4);
         List<Integer> valNotes = Arrays.asList(100, 500, 1000, 5000);
@@ -27,26 +28,12 @@ public class Main {
         CashMachine cashMachine = new CashMachine(moneyBox);
         MoneyBoxService moneyBoxService = new MoneyBoxServiceImpl(bill);
         CashMachineService cashMachineService = new CashMachineServiceImpl(moneyBoxService);
-        System.out.println("Денег в АТМ до снятия "+ amountToGet +": " + moneyBoxService.checkSum(moneyBox));
+        logger .log(Level.INFO, "Денег в АТМ до снятия " + amountToGet + ": " + moneyBoxService.checkSum(moneyBox));
         List<Integer> takenAmount = cashMachineService.getMoney(cashMachine, amountToGet);
-        System.out.println("Взяты купюры " + takenAmount);
-        System.out.println("Денег в АТМ после снятия " + amountToGet + ": " + moneyBoxService.checkSum(moneyBox));
-        System.out.println("Денег в АТМ до пополнения "+ amountToPut +": " + moneyBoxService.checkSum(moneyBox));
+        logger .log(Level.INFO, "Взяты купюры " + takenAmount);
+        logger .log(Level.INFO, "Денег в АТМ после снятия " + amountToGet + ": " + moneyBoxService.checkSum(moneyBox));
+        logger .log(Level.INFO, "Денег в АТМ до пополнения " + amountToPut + ": " + moneyBoxService.checkSum(moneyBox));
         cashMachineService.putMoney(cashMachine, notesToPut);
-        System.out.println("Денег в АТМ после пополнения "+ amountToPut +": " + moneyBoxService.checkSum(moneyBox));
-        System.out.println("Попытка снять больше чем есть в банкомате");
-        try {
-            cashMachineService.getMoney(cashMachine, amountToGetBigger);
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-        System.out.println("Попытка снять сумму не кратную купюрам");
-        try {
-            cashMachineService.getMoney(cashMachine, amountToGetIllegal);
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
+        logger .log(Level.INFO, "Денег в АТМ после пополнения " + amountToPut + ": " + moneyBoxService.checkSum(moneyBox));
     }
-
-
 }

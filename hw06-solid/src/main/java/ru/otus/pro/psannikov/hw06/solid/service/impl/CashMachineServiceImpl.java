@@ -8,7 +8,6 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-
 public class CashMachineServiceImpl implements CashMachineService {
 
     private final MoneyBoxService moneyBoxService;
@@ -22,14 +21,14 @@ public class CashMachineServiceImpl implements CashMachineService {
         try {
             return moneyBoxService.getMoney(machine.getMoneyBox(), amount.intValue());
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("Cash withdrawal error. Try again");
         }
     }
 
     @Override
     public void putMoney(CashMachine machine, List<Integer> notes) {
         List<Integer> arrangedNotes = new ArrayList<>(notes);
-        for (int i = 0; i < 4 - arrangedNotes.size(); i ++) {
+        for (int i = 0; i < 4 - arrangedNotes.size(); i++) {
             arrangedNotes.add(0);
         }
         moneyBoxService.putMoney(machine.getMoneyBox(), arrangedNotes);

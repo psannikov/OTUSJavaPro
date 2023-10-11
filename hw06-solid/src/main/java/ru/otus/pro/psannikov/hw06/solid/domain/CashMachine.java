@@ -1,7 +1,5 @@
 package ru.otus.pro.psannikov.hw06.solid.domain;
 
-import ru.otus.pro.psannikov.hw06.solid.domain.MoneyBox;
-
 public class CashMachine {
     private MoneyBox moneyBox;
 
