@@ -34,7 +34,7 @@ public class CachMachineServiceTest {
         cashMachineService = new CashMachineServiceImpl(moneyBoxService);
     }
     @Test
-    void getBiggerAmount() {
+    void getBiggerAmountFail() {
         BigDecimal amountToGetBigger = BigDecimal.valueOf(440000000);
         String expectMessage= "Cash withdrawal error. Try again";
         Exception exception = assertThrows(RuntimeException.class, () -> {
