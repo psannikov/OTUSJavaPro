@@ -3,8 +3,9 @@ package ru.otus.psannikov.hw07.patterns.listener.homework;
 
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
-import ru.otus.model.Message;
-import ru.otus.model.ObjectForMessage;
+import ru.otus.pro.psannikov.hw07.patterns.listener.homework.HistoryListener;
+import ru.otus.pro.psannikov.hw07.patterns.model.Message;
+import ru.otus.pro.psannikov.hw07.patterns.model.ObjectForMessage;
 
 import java.util.ArrayList;
 import java.util.List;

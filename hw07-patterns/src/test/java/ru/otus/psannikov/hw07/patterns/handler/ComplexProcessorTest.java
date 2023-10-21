@@ -3,9 +3,10 @@ package ru.otus.psannikov.hw07.patterns.handler;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import ru.otus.psannikov.hw07.patterns.model.Message;
-import ru.otus.psannikov.hw07.patterns.listener.Listener;
-import ru.otus.psannikov.hw07.patterns.processor.Processor;
+import ru.otus.pro.psannikov.hw07.patterns.handler.ComplexProcessor;
+import ru.otus.pro.psannikov.hw07.patterns.model.Message;
+import ru.otus.pro.psannikov.hw07.patterns.listener.Listener;
+import ru.otus.pro.psannikov.hw07.patterns.processor.Processor;
 
 import java.util.ArrayList;
 import java.util.List;
