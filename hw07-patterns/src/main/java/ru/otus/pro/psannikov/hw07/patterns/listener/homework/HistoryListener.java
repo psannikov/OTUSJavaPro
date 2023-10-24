@@ -5,14 +5,19 @@ import ru.otus.pro.psannikov.hw07.patterns.model.Message;
 import java.util.Optional;
 
 public class HistoryListener implements Listener, HistoryReader {
+    Editor editor = new Editor();
+    Caretaker caretaker = new Caretaker();
 
     @Override
     public void onUpdated(Message msg) {
-        throw new UnsupportedOperationException();
+        editor.add(msg);
+        caretaker.setMemento(editor.saveState());
+        String message = String.format("Сообщение сохранено: ", msg);
+        System.out.println(message);
     }
 
     @Override
     public Optional<Message> findMessageById(long id) {
-        throw new UnsupportedOperationException();
+        return Optional.ofNullable(caretaker.getMementoById(id));
     }
 }
