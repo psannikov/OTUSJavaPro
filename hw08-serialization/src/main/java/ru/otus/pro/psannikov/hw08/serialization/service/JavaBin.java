@@ -1,13 +1,13 @@
-package ru.otus.pro.psannikov.hw08.serialization.parsed;
+package ru.otus.pro.psannikov.hw08.serialization.service;
 
-import ru.otus.pro.psannikov.hw08.serialization.source.Message;
+import ru.otus.pro.psannikov.hw08.serialization.domain.Message;
 
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class JavaBin implements Parser{
-    private String fileName;
+    final private String fileName;
 
     public JavaBin(String fileName) {
         this.fileName = fileName;

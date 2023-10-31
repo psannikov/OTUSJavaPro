@@ -1,21 +1,16 @@
 package ru.otus.pro.psannikov.hw08.serialization;
 
-import ru.otus.pro.psannikov.hw08.serialization.parsed.JavaBin;
-import ru.otus.pro.psannikov.hw08.serialization.parsed.Json;
-import ru.otus.pro.psannikov.hw08.serialization.parsed.XML;
-import ru.otus.pro.psannikov.hw08.serialization.parsed.YAML;
-import ru.otus.pro.psannikov.hw08.serialization.source.JsonReaderSource;
-import ru.otus.pro.psannikov.hw08.serialization.source.Message;
+import ru.otus.pro.psannikov.hw08.serialization.service.JavaBin;
+import ru.otus.pro.psannikov.hw08.serialization.service.Json;
+import ru.otus.pro.psannikov.hw08.serialization.service.XML;
+import ru.otus.pro.psannikov.hw08.serialization.service.YAML;
+import ru.otus.pro.psannikov.hw08.serialization.service.JsonReaderSource;
+import ru.otus.pro.psannikov.hw08.serialization.domain.Message;
 
 import java.io.IOException;
 import java.util.List;
 
 public class MainApp {
-    /*
-    Сериализовать полученные данные и записать их в файл (текстовой или бинарный)
-    Десериализовать полученные данный и вывести результат на консоль
-    Обязательно (текстовой): json, xml, csv, yml (можно использовать любой вреймворк)
-    Дополнительно (бинарный): PrtotoBuf, Java Serialization*/
 
     public static void main(String[] args) throws IOException {
         final String sourceJsonFileName = "sms.json";

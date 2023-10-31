@@ -1,4 +1,4 @@
-package ru.otus.pro.psannikov.hw08.serialization.source;
+package ru.otus.pro.psannikov.hw08.serialization.domain;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonFormat;

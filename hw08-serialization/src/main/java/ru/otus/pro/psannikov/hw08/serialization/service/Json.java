@@ -1,18 +1,16 @@
-package ru.otus.pro.psannikov.hw08.serialization.parsed;
+package ru.otus.pro.psannikov.hw08.serialization.service;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import ru.otus.pro.psannikov.hw08.serialization.source.Message;
+import ru.otus.pro.psannikov.hw08.serialization.domain.Message;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Json implements Parser {
-    private String fileName;
+    final private String fileName;
     private final ObjectMapper mapper = new ObjectMapper().findAndRegisterModules();
 
     public Json(String fileName) {

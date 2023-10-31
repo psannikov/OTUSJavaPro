@@ -1,9 +1,9 @@
-package ru.otus.pro.psannikov.hw08.serialization.source;
+package ru.otus.pro.psannikov.hw08.serialization.service;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import ru.otus.pro.psannikov.hw08.serialization.source.Message;
+import ru.otus.pro.psannikov.hw08.serialization.domain.Message;
 
 import java.io.File;
 import java.io.IOException;
@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class JsonReaderSource {
-    private List<Message> messages = new ArrayList<>();
+    final private List<Message> messages = new ArrayList<>();
     private final String fileNameToRead;
 
     public JsonReaderSource(String fileNameToRead) {
@@ -55,5 +55,5 @@ public class JsonReaderSource {
                 .distinct()
                 .sorted(Comparator.comparing(Message::getSendDate))
                 .collect(Collectors.toList());
-    };
+    }
 }
