@@ -15,7 +15,8 @@ public class Demo {
                 new ProcessorChangeField11and12(),
                 new LoggerProcessor(new ProcessorThrowException()));
 
-        var complexProcessor = new ComplexProcessor(processors, ex -> {});
+        var complexProcessor = new ComplexProcessor(processors, ex -> {
+        });
         var listenerPrinter = new ListenerPrinterConsole();
         complexProcessor.addListener(listenerPrinter);
 

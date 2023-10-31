@@ -127,6 +127,25 @@ public class Message {
                 ", field13='" + field13 + '\'' +
                 '}';
     }
+    public Message (Message original) {
+        this.id = original.id;
+        this.field1 = original.field1;
+        this.field2 = original.field2;
+        this.field3 = original.field3;
+        this.field4 = original.field4;
+        this.field5 = original.field5;
+        this.field6 = original.field6;
+        this.field7 = original.field7;
+        this.field8 = original.field8;
+        this.field9 = original.field9;
+        this.field10 = original.field10;
+        this.field11 = original.field11;
+        this.field12 = original.field12;
+        this.field13 = original.field13;
+    }
+    public Message copyOf() {
+        return new Message.Builder(id,field1,field2,field3,field4,field5,field6,field7,field8,field9,field10,field11,field12,new ObjectForMessage(field13.copyData())).build();
+    }
 
     public static class Builder {
         private final long id;

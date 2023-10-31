@@ -4,8 +4,8 @@ package ru.otus.psannikov.hw07.patterns.handler;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import ru.otus.pro.psannikov.hw07.patterns.handler.ComplexProcessor;
-import ru.otus.pro.psannikov.hw07.patterns.model.Message;
 import ru.otus.pro.psannikov.hw07.patterns.listener.Listener;
+import ru.otus.pro.psannikov.hw07.patterns.model.Message;
 import ru.otus.pro.psannikov.hw07.patterns.processor.Processor;
 
 import java.util.ArrayList;
@@ -13,12 +13,7 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
-import static org.mockito.ArgumentMatchers.eq;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.never;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 class ComplexProcessorTest {
 

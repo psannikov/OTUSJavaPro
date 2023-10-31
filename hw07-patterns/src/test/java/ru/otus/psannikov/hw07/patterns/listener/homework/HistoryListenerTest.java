@@ -6,7 +6,6 @@ import ru.otus.pro.psannikov.hw07.patterns.model.Message;
 import ru.otus.pro.psannikov.hw07.patterns.model.ObjectForMessage;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 
@@ -35,9 +34,7 @@ class HistoryListenerTest {
         field13Data.clear(); //меняем исходный список
         //then
         var messageFromHistory = historyListener.findMessageById(id);
-//        System.out.println(messageFromHistory.get().getField13().getData().get(0));
-//        System.out.println(messageFromHistory.get().getField13().getData());
         assertThat(messageFromHistory).isPresent();
-//        assertThat(messageFromHistory.get().getField13().getData()).containsExactly(data);
+        assertThat(messageFromHistory.get().getField13().getData()).containsExactly(data);
     }
 }

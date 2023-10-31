@@ -2,7 +2,7 @@ package ru.otus.pro.psannikov.hw07.patterns.processor;
 
 import ru.otus.pro.psannikov.hw07.patterns.model.Message;
 
-public class ProcessorChangeField11and12 implements Processor{
+public class ProcessorChangeField11and12 implements Processor {
     @Override
     public Message process(Message message) {
         String tmpField11 = message.getField11();

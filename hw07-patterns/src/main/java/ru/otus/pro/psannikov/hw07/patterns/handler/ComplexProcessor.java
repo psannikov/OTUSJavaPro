@@ -1,7 +1,7 @@
 package ru.otus.pro.psannikov.hw07.patterns.handler;
 
-import ru.otus.pro.psannikov.hw07.patterns.model.Message;
 import ru.otus.pro.psannikov.hw07.patterns.listener.Listener;
+import ru.otus.pro.psannikov.hw07.patterns.model.Message;
 import ru.otus.pro.psannikov.hw07.patterns.processor.Processor;
 
 import java.util.ArrayList;
