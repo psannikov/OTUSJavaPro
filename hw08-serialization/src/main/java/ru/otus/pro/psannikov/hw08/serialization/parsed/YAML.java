@@ -2,32 +2,32 @@ package ru.otus.pro.psannikov.hw08.serialization.parsed;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 import ru.otus.pro.psannikov.hw08.serialization.source.Message;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Json implements Parser {
+public class YAML implements Parser{
     private String fileName;
-    private final ObjectMapper mapper = new ObjectMapper().findAndRegisterModules();
-
-    public Json(String fileName) {
+    private final ObjectMapper mapper = new ObjectMapper(new YAMLFactory()).findAndRegisterModules();
+    public YAML(String fileName) {
         this.fileName = fileName;
     }
 
+    @Override
     public void writeToFile(List<Message> list) throws IOException {
-        File jsonFile = new File(fileName);
-        mapper.writeValue(jsonFile, list);
+        File yamlFile = new File(fileName);
+        mapper.writeValue(yamlFile, list);
     }
 
+    @Override
     public List<Message> readFromFile() throws IOException {
         List<Message> messages = new ArrayList<>();
-        File jsonFile = new File(fileName);
-        JsonNode root = mapper.readTree(jsonFile);
+        File yamlFile = new File(fileName);
+        JsonNode root = mapper.readTree(yamlFile);
         if (root.isArray()) {
             for (JsonNode messageItem : root) {
                 Message message = mapper.treeToValue(messageItem, Message.class);

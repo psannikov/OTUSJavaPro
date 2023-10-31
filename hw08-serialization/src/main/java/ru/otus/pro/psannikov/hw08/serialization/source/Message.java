@@ -6,12 +6,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
 @Setter
 @Getter
-public class Message {
+public class Message implements Serializable {
     private String chatIdentifier;
     private String membersLast;
     @JsonProperty("belong_number")
