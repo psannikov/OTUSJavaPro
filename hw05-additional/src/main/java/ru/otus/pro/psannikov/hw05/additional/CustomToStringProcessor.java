@@ -26,14 +26,12 @@ public class CustomToStringProcessor extends AbstractProcessor {
     }
 
     private void generateToString(TypeElement element) {
-        // Extract necessary information about the class
+
         String className = element.getSimpleName().toString();
         String packageName = getPackageName(element);
 
-        // Create the source code for the toString() method
         String source = generateToStringSource(className);
 
-        // Get a filer to create a new source file
         Filer filer = processingEnv.getFiler();
         try {
             JavaFileObject fileObject = filer.createSourceFile(packageName + "." + className + "ToString");
@@ -54,12 +52,11 @@ public class CustomToStringProcessor extends AbstractProcessor {
     }
 
     private String generateToStringSource(String className) {
-        return "package com.yourpackage;\n\n" +
+        return "package ru.otus.pro.psannikov.hw05.additional;\n\n" +
                 "public class " + className + "ToString {\n" +
                 "    @Override\n" +
                 "    public String toString() {\n" +
-                "        // Generate your custom toString logic here\n" +
-                "        return \"Custom toString for " + className + "\";\n" +
+                "        return \"Custom toString package ru.otus.pro.psannikov.hw05.additional for " + className + "\";\n" +
                 "    }\n" +
                 "}\n";
     }
