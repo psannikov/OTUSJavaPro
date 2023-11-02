@@ -24,7 +24,7 @@ public class Bank {
     private String name;
 
     @ManyToOne
-    @JoinColumn(name = "city", nullable = false)
+    @JoinColumn(name = "city")
     private City city;
 
     @OneToMany(mappedBy="bank")

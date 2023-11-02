@@ -18,98 +18,93 @@ import java.util.Random;
 
 public class HibernateOtusExampleMain {
 
-	private static final Log LOGGER = LogFactory.getLog(MethodHandles.lookup().lookupClass());
+    private static final Log LOGGER = LogFactory.getLog(MethodHandles.lookup().lookupClass());
 
-	public static void main(String[] args) {
+    public static void main(String[] args) {
+        SessionFactory sessionFactory = new HibernateUtilImpl()
+                .buildSessionFactory(SessionFactoryType.JAVA_BASED);
+        insertNewCity(sessionFactory);
+        insertNewEmail(sessionFactory);
+        insertNewBank(sessionFactory);
+        selectBank(sessionFactory);
+        sessionFactory.close();
+    }
 
-		SessionFactory sessionFactory = new HibernateUtilImpl()
-				.buildSessionFactory(SessionFactoryType.JAVA_BASED);
+    private static void insertNewBank(SessionFactory sessionFactory) {
 
-		//insertNewBank(sessionFactory);
-		//insertNewCity(sessionFactory);
-		//insertNewEmail(sessionFactory);
-		//selectBank(sessionFactory);
+        Bank bank = generateRandomBank();
 
+        //start transaction
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
 
-		sessionFactory.close();
+        Bank merged = session.merge(bank);
+        session.getTransaction().commit();
 
-	}
+        LOGGER.info("A new Bank with id " + merged.getId() + " has been created!");
+        // close transaction
+        session.close();
 
-	private static void insertNewBank(SessionFactory sessionFactory) {
+    }
 
-		Bank bank = generateRandomBank();
+    private static void insertNewCity(SessionFactory sessionFactory) {
 
-		//start transaction
-		Session session = sessionFactory.getCurrentSession();
-		session.beginTransaction();
+        City city = new City();
+        city.setName("Samara");
 
-		Bank merged = session.merge(bank);
-		session.getTransaction().commit();
+        //start transaction
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
 
-		LOGGER.info("A new Bank with id " + merged.getId() + " has been created!");
-		// close transaction
-		session.close();
+        City merged = session.merge(city);
+        session.getTransaction().commit();
 
-	}
+        LOGGER.info("A new City with id " + merged.getId() + " has been created!");
+        // close transaction
+        session.close();
 
-	private static void insertNewCity(SessionFactory sessionFactory) {
+    }
 
-		City city = new City();
-		city.setName("Samara");
+    private static void insertNewEmail(SessionFactory sessionFactory) {
 
-		//start transaction
-		Session session = sessionFactory.getCurrentSession();
-		session.beginTransaction();
+        Email email = new Email();
+        email.setInbox("my@inbox.com");
 
-		City merged = session.merge(city);
-		session.getTransaction().commit();
+        //start transaction
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
 
-		LOGGER.info("A new City with id " + merged.getId() + " has been created!");
-		// close transaction
-		session.close();
+        Email merged = session.merge(email);
+        session.getTransaction().commit();
 
-	}
+        LOGGER.info("A new Email with id " + merged.getId() + " has been created!");
+        // close transaction
+        session.close();
 
-	private static void insertNewEmail(SessionFactory sessionFactory) {
+    }
 
-		Email email = new Email();
-		email.setInbox("my@inbox.com");
+    private static void selectBank(SessionFactory sessionFactory) {
 
-		//start transaction
-		Session session = sessionFactory.getCurrentSession();
-		session.beginTransaction();
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
 
-		Email merged = session.merge(email);
-		session.getTransaction().commit();
+        Query query = session.createNativeQuery("SELECT b.id, b.name, b.city FROM Bank b", Bank.class);
 
-		LOGGER.info("A new Email with id " + merged.getId() + " has been created!");
-		// close transaction
-		session.close();
+        List<Bank> rows = query.getResultList();
 
-	}
+        rows.stream()
+                .map(row -> BankDto.builder()
+                        .id(row.getId())
+                        .name(row.getName())
+                        .build())
+                .forEach(build -> LOGGER.info("A Bank with id " + build.getId() + " has been selected!"));
 
-	private static void selectBank(SessionFactory sessionFactory) {
+        session.close();
 
-		Session session = sessionFactory.getCurrentSession();
-		session.beginTransaction();
+    }
 
-		Query query = session.createNativeQuery("SELECT b.id, b.name, b.city FROM Bank b", Bank.class);
-
-		List<Bank> rows = query.getResultList();
-
-		rows.stream()
-			.map(row -> BankDto.builder()
-			.id(row.getId())
-			.name(row.getName())
-			.build())
-			.forEach(build -> LOGGER.info("A Bank with id " + build.getId() + " has been selected!"));
-
-		session.close();
-
-	}
-
-	private static Bank generateRandomBank() {
-		return Bank.builder().name("SuperBank_" + new Random(100).nextInt()).build();
-	}
+    private static Bank generateRandomBank() {
+        return Bank.builder().name("SuperBank_" + new Random(100).nextInt()).build();
+    }
 
 }
