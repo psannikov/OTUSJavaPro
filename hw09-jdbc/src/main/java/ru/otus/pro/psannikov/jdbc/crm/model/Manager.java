@@ -8,6 +8,11 @@ public class Manager {
     public Manager() {
     }
 
+    public Manager(String label, String param1) {
+        this.label = label;
+        this.param1 = param1;
+    }
+
     public Manager(String label) {
         this.label = label;
     }

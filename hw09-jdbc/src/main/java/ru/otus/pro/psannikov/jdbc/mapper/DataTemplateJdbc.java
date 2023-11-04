@@ -33,6 +33,10 @@ public class DataTemplateJdbc<T> implements DataTemplate<T> {
             DataTemplate<Client> clientDataTemplateJdbc = new ClientDataTemplateJdbc(dbExecutor);
             return (Optional<T>) clientDataTemplateJdbc.findById(connection,id);
         }
+        if (templateClass.getSimpleName().equals(ClassesName.MANAGER.getTitle())) {
+            DataTemplate<Manager> managerDataTemplate = new ManagerDataTemplateJdbc(dbExecutor);
+            return (Optional<T>) managerDataTemplate.findById(connection,id);
+        }
         throw new UnsupportedOperationException();}
 
     @Override
@@ -44,12 +48,10 @@ public class DataTemplateJdbc<T> implements DataTemplate<T> {
     public long insert(Connection connection, T object) {
         if (templateClass.getSimpleName().equals(ClassesName.CLIENT.getTitle())) {
             DataTemplate<Client> clientDataTemplateJdbc = new ClientDataTemplateJdbc(dbExecutor);
-            clientDataTemplateJdbc.insert(connection, (Client) object);
-            return 0;
+            return clientDataTemplateJdbc.insert(connection, (Client) object);
         } else if (templateClass.getSimpleName().equals(ClassesName.MANAGER.getTitle())) {
             DataTemplate<Manager> managerDataTemplate = new ManagerDataTemplateJdbc(dbExecutor);
-            managerDataTemplate.insert(connection, (Manager) object);
-            return 0;
+            return managerDataTemplate.insert(connection, (Manager) object);
         }
         {
             throw new UnsupportedOperationException();
