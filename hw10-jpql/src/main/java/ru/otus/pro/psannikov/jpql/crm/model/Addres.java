@@ -20,4 +20,8 @@ public class Addres {
     @Column(name = "id")
     private long id;
     private String street;
+
+    public Addres(String street) {
+        this.street = street;
+    }
 }

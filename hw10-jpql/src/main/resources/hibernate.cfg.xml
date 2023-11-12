@@ -8,7 +8,6 @@
 
 
     <property name="hibernate.connection.url">jdbc:postgresql://localhost:5430/demoDB</property>
-
     <property name="hibernate.connection.username">usr</property>
     <property name="hibernate.connection.password">pwd</property>
 

@@ -15,7 +15,7 @@ dependencies {
 
     implementation("ch.qos.logback:logback-classic:1.4.5")
     implementation("org.hibernate.orm:hibernate-core:6.3.1.Final")
-    implementation("org.flywaydb:flyway-core:10.0.0")
+    implementation("org.flywaydb:flyway-core:9.22.0")
 
     implementation("org.postgresql:postgresql:42.6.0")
 

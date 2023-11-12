@@ -13,6 +13,10 @@ import lombok.Setter;
 @Table(name="phones")
 @Entity
 public class Phone {
+    public Phone(String number) {
+        this.number = number;
+    }
+
     @Id
     @SequenceGenerator(name = "phone_gen", sequenceName = "phone_seq",
             initialValue = 1, allocationSize = 1)
