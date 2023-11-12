@@ -27,8 +27,8 @@ public class DbServiceDemo {
         var dbUserName = configuration.getProperty("hibernate.connection.username");
         var dbPassword = configuration.getProperty("hibernate.connection.password");
         new MigrationsExecutorFlyway(dbUrl, dbUserName, dbPassword).executeMigrations();
-        try {
-        var sessionFactory = HibernateUtils.buildSessionFactory(configuration, Client.class);
+
+        var sessionFactory = HibernateUtils.buildSessionFactory(configuration, Client.class, Addres.class, Phone.class);
 
 
         var transactionManager = new TransactionManagerHibernate(sessionFactory);
@@ -37,24 +37,19 @@ public class DbServiceDemo {
 
         var dbServiceClient = new DbServiceClientImpl(transactionManager, clientTemplate);
 
-            dbServiceClient.saveClient(new Client("Vasya", new Addres("Main St"), Arrays.asList(new Phone("9876543210"), new Phone("654321"))));
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-//        dbServiceClient.saveClient(new Client("dbServiceFirst"));
-//
-//        var clientSecond = dbServiceClient.saveClient(new Client("dbServiceSecond"));
-//        var clientSecondSelected = dbServiceClient.getClient(clientSecond.getId())
-//                .orElseThrow(() -> new RuntimeException("Client not found, id:" + clientSecond.getId()));
-//        log.info("clientSecondSelected:{}", clientSecondSelected);
-//
-//        dbServiceClient.saveClient(new Client(clientSecondSelected.getId(), "dbServiceSecondUpdated"));
-//        var clientUpdated = dbServiceClient.getClient(clientSecondSelected.getId())
-//                .orElseThrow(() -> new RuntimeException("Client not found, id:" + clientSecondSelected.getId()));
-//        log.info("clientUpdated:{}", clientUpdated);
-//
-//        log.info("All clients");
-//        dbServiceClient.findAll().forEach(client -> log.info("client:{}", client));
+        dbServiceClient.saveClient(new Client("dbServiceFirst", new Addres("Main St"), Arrays.asList(new Phone("9876543210"), new Phone("654321"))));
 
+        var clientSecond = dbServiceClient.saveClient(new Client("dbServiceSecond", new Addres("Second St"), Arrays.asList(new Phone("+9876543210"), new Phone("+7912654321"))));
+        var clientSecondSelected = dbServiceClient.getClient(clientSecond.getId())
+                .orElseThrow(() -> new RuntimeException("Client not found, id:" + clientSecond.getId()));
+        log.info("clientSecondSelected:{}", clientSecondSelected);
+
+        dbServiceClient.saveClient(new Client(clientSecondSelected.getId(), "dbServiceSecondUpdated", new Addres("Slave St"), Arrays.asList(new Phone("123456"), new Phone("9998887766"))));
+        var clientUpdated = dbServiceClient.getClient(clientSecondSelected.getId())
+                .orElseThrow(() -> new RuntimeException("Client not found, id:" + clientSecondSelected.getId()));
+        log.info("clientUpdated:{}", clientUpdated);
+
+        log.info("All clients");
+        dbServiceClient.findAll().forEach(client -> log.info("client:{}", client));
     }
 }

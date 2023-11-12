@@ -31,7 +31,7 @@ public class Client implements Cloneable {
     private Addres addres;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
-    @JoinColumn(name = "phone_id")
+    @JoinColumn(name = "client_id")
     private List<Phone> phones;
 
     public Client(String name, Addres addres, List<Phone> phones) {
@@ -55,6 +55,11 @@ public class Client implements Cloneable {
     @Override
     public Client clone() {
         return new Client(this.id, this.name, this.addres, this.phones);
+    }
+
+    public Client(Long id, String name) {
+        this.id = id;
+        this.name = name;
     }
 
     @Override
