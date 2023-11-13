@@ -2,7 +2,6 @@ package ru.otus.pro.psannikov.jpql.crm.model;
 
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -28,19 +27,19 @@ public class Client implements Cloneable {
 
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "addres_id")
-    private Addres addres;
+    private Address addres;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
     @JoinColumn(name = "client_id")
     private List<Phone> phones;
 
-    public Client(String name, Addres addres, List<Phone> phones) {
+    public Client(String name, Address addres, List<Phone> phones) {
         this.name = name;
         this.addres = addres;
         this.phones = phones;
     }
 
-    public Client(Long id, String name, Addres addres, List<Phone> phones) {
+    public Client(Long id, String name, Address addres, List<Phone> phones) {
         this.id = id;
         this.name = name;
         this.addres = addres;

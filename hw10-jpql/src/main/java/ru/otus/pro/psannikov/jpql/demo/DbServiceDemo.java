@@ -7,7 +7,7 @@ import ru.otus.pro.psannikov.jpql.core.repository.DataTemplateHibernate;
 import ru.otus.pro.psannikov.jpql.core.repository.HibernateUtils;
 import ru.otus.pro.psannikov.jpql.core.sessionmanager.TransactionManagerHibernate;
 import ru.otus.pro.psannikov.jpql.crm.dbmigrations.MigrationsExecutorFlyway;
-import ru.otus.pro.psannikov.jpql.crm.model.Addres;
+import ru.otus.pro.psannikov.jpql.crm.model.Address;
 import ru.otus.pro.psannikov.jpql.crm.model.Client;
 import ru.otus.pro.psannikov.jpql.crm.model.Phone;
 import ru.otus.pro.psannikov.jpql.crm.service.DbServiceClientImpl;
@@ -28,7 +28,7 @@ public class DbServiceDemo {
         var dbPassword = configuration.getProperty("hibernate.connection.password");
         new MigrationsExecutorFlyway(dbUrl, dbUserName, dbPassword).executeMigrations();
 
-        var sessionFactory = HibernateUtils.buildSessionFactory(configuration, Client.class, Addres.class, Phone.class);
+        var sessionFactory = HibernateUtils.buildSessionFactory(configuration, Client.class, Address.class, Phone.class);
 
 
         var transactionManager = new TransactionManagerHibernate(sessionFactory);
@@ -37,14 +37,14 @@ public class DbServiceDemo {
 
         var dbServiceClient = new DbServiceClientImpl(transactionManager, clientTemplate);
 
-        dbServiceClient.saveClient(new Client("dbServiceFirst", new Addres("Main St"), Arrays.asList(new Phone("9876543210"), new Phone("654321"))));
+        dbServiceClient.saveClient(new Client("dbServiceFirst", new Address("Main St"), Arrays.asList(new Phone("9876543210"), new Phone("654321"))));
 
-        var clientSecond = dbServiceClient.saveClient(new Client("dbServiceSecond", new Addres("Second St"), Arrays.asList(new Phone("+9876543210"), new Phone("+7912654321"))));
+        var clientSecond = dbServiceClient.saveClient(new Client("dbServiceSecond", new Address("Second St"), Arrays.asList(new Phone("+9876543210"), new Phone("+7912654321"))));
         var clientSecondSelected = dbServiceClient.getClient(clientSecond.getId())
                 .orElseThrow(() -> new RuntimeException("Client not found, id:" + clientSecond.getId()));
         log.info("clientSecondSelected:{}", clientSecondSelected);
 
-        dbServiceClient.saveClient(new Client(clientSecondSelected.getId(), "dbServiceSecondUpdated", new Addres("Slave St"), Arrays.asList(new Phone("123456"), new Phone("9998887766"))));
+        dbServiceClient.saveClient(new Client(clientSecondSelected.getId(), "dbServiceSecondUpdated", new Address("Slave St"), Arrays.asList(new Phone("123456"), new Phone("9998887766"))));
         var clientUpdated = dbServiceClient.getClient(clientSecondSelected.getId())
                 .orElseThrow(() -> new RuntimeException("Client not found, id:" + clientSecondSelected.getId()));
         log.info("clientUpdated:{}", clientUpdated);
