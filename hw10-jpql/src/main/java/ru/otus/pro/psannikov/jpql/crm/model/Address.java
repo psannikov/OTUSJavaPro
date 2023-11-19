@@ -6,13 +6,15 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.Objects;
+
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name="address")
 @Entity
-public class Addres {
+public class Address {
     @Id
     @SequenceGenerator(name = "addres_gen", sequenceName = "addres_seq",
             initialValue = 1, allocationSize = 1)
@@ -21,7 +23,24 @@ public class Addres {
     private long id;
     private String street;
 
-    public Addres(String street) {
+    public Address(String street) {
         this.street = street;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Address address = (Address) o;
+        return Objects.equals(street, address.street);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(street);
+    }
+
+    public Address(Long o, String anyStreet) {
+        this.street = anyStreet;
     }
 }

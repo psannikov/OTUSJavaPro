@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.Objects;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -24,4 +26,21 @@ public class Phone {
     @Column(name = "id")
     private long id;
     private String number;
+
+    public Phone(Long o, String number) {
+        this.number = number;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Phone phone = (Phone) o;
+        return Objects.equals(number, phone.number);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(number);
+    }
 }
