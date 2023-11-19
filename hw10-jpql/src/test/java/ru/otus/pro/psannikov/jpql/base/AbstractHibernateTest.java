@@ -11,7 +11,9 @@ import ru.otus.pro.psannikov.jpql.core.repository.DataTemplateHibernate;
 import ru.otus.pro.psannikov.jpql.core.repository.HibernateUtils;
 import ru.otus.pro.psannikov.jpql.core.sessionmanager.TransactionManagerHibernate;
 import ru.otus.pro.psannikov.jpql.crm.dbmigrations.MigrationsExecutorFlyway;
+import ru.otus.pro.psannikov.jpql.crm.model.Address;
 import ru.otus.pro.psannikov.jpql.crm.model.Client;
+import ru.otus.pro.psannikov.jpql.crm.model.Phone;
 import ru.otus.pro.psannikov.jpql.crm.service.DBServiceClient;
 import ru.otus.pro.psannikov.jpql.crm.service.DbServiceClientImpl;
 
@@ -51,7 +53,7 @@ public abstract class AbstractHibernateTest {
         configuration.setProperty("hibernate.connection.username", dbUserName);
         configuration.setProperty("hibernate.connection.password", dbPassword);
 
-        sessionFactory = HibernateUtils.buildSessionFactory(configuration, Client.class);
+        sessionFactory = HibernateUtils.buildSessionFactory(configuration,  Client.class, Address.class, Phone.class);
 
         transactionManager = new TransactionManagerHibernate(sessionFactory);
         clientTemplate = new DataTemplateHibernate<>(Client.class);

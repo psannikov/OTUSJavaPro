@@ -19,12 +19,25 @@ public class Phone {
         this.number = number;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Phone phone = (Phone) o;
+        return Objects.equals(number, phone.number);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(number);
+    }
+
     @Id
     @SequenceGenerator(name = "phone_gen", sequenceName = "phone_seq",
             initialValue = 1, allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "phone_gen")
     @Column(name = "id")
-    private long id;
+    private Long id;
     private String number;
 
     public Phone(Long o, String number) {
