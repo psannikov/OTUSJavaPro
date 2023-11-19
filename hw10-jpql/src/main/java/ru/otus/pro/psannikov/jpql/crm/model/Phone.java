@@ -11,7 +11,6 @@ import java.util.Objects;
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
 @Table(name="phones")
 @Entity
 public class Phone {
@@ -44,16 +43,4 @@ public class Phone {
         this.number = number;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Phone phone = (Phone) o;
-        return Objects.equals(number, phone.number);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(number);
-    }
 }
