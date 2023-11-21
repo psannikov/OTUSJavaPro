@@ -30,9 +30,6 @@ class HomeworkTest {
     private Metadata metadata;
     private SessionFactory sessionFactory;
 
-    // Это надо раскомментировать, у выполненного ДЗ, все тесты должны проходить
-    // Кроме удаления комментирования, тестовый класс менять нельзя
-
     @BeforeEach
     public void setUp() {
         makeTestDependencies();
@@ -62,8 +59,8 @@ class HomeworkTest {
             }
         });
 
-        var client = new Client(null, "Vasya", new Address(null, "AnyStreet"),
-            List.of(new Phone(null, "13-555-22"), new Phone(null, "14-666-333")));
+        var client = new Client(null, "Vasya", new Address( "AnyStreet"),
+            List.of(new Phone( "13-555-22"), new Phone( "14-666-333")));
         try (var session = sessionFactory.openSession()) {
             session.getTransaction().begin();
             session.persist(client);
@@ -82,15 +79,15 @@ class HomeworkTest {
 
     @Test
     public void testForHomeworkRequirementsForClientReferences() throws Exception {
-        var client = new Client(null, "Vasya", new Address(null, "AnyStreet"),
-                List.of(new Phone(null, "13-555-22"), new Phone(null, "14-666-333")));
+        var client = new Client(null, "Vasya", new Address( "AnyStreet"),
+                List.of(new Phone( "13-555-22"), new Phone( "14-666-333")));
         assertThatClientHasCorrectReferences(client);
     }
 
     @Test
     public void testForHomeworkRequirementsForClonedClientReferences() throws Exception {
-        var client = new Client(null, "Vasya", new Address(null, "AnyStreet"),
-                List.of(new Phone(null, "13-555-22"), new Phone(null, "14-666-333"))).clone();
+        var client = new Client(null, "Vasya", new Address( "AnyStreet"),
+                List.of(new Phone( "13-555-22"), new Phone( "14-666-333"))).clone();
         assertThatClientHasCorrectReferences(client);
     }
 

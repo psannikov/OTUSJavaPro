@@ -1,7 +1,6 @@
 package ru.otus.pro.psannikov.jpql.crm.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -11,7 +10,7 @@ import java.util.Objects;
 @Getter
 @Setter
 @NoArgsConstructor
-@Table(name="phones")
+@Table(name = "phones")
 @Entity
 public class Phone {
     public Phone(String number) {
@@ -38,9 +37,5 @@ public class Phone {
     @Column(name = "id")
     private Long id;
     private String number;
-
-    public Phone(Long o, String number) {
-        this.number = number;
-    }
 
 }

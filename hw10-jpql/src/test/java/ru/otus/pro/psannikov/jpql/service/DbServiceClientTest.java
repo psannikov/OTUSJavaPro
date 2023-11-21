@@ -17,14 +17,9 @@ class DbServiceClientTest extends AbstractHibernateTest {
     @Test
     @DisplayName(" корректно сохранять, изменять и загружать клиента")
     void shouldCorrectSaveClient() {
-        //given
-//        var client = new Client("Ivan");
-
-        // Это надо раскомментировать, у выполненного ДЗ, все тесты должны проходить
-        // Кроме удаления комментирования, тестовый класс менять нельзя
 try {
-    var client = new Client(null, "Vasya", new Address(null, "AnyStreet"), List.of(new Phone(null, "13-555-22"),
-            new Phone(null, "14-666-333")));
+    var client = new Client(null, "Vasya", new Address( "AnyStreet"), List.of(new Phone( "13-555-22"),
+            new Phone( "14-666-333")));
 
 
     //when

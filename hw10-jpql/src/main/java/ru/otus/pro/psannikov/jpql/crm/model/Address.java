@@ -12,7 +12,7 @@ import java.util.Objects;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name="address")
+@Table(name = "address")
 @Entity
 public class Address {
     @Id
@@ -40,7 +40,4 @@ public class Address {
         return Objects.hash(street);
     }
 
-    public Address(Long o, String anyStreet) {
-        this.street = anyStreet;
-    }
 }

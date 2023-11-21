@@ -46,19 +46,9 @@ public class Client implements Cloneable {
         this.phones = phones;
     }
 
-    public Client(String name) {
-        this.id = null;
-        this.name = name;
-    }
-
     @Override
     public Client clone() {
         return new Client(this.id, this.name, this.address, this.phones);
-    }
-
-    public Client(Long id, String name) {
-        this.id = id;
-        this.name = name;
     }
 
     @Override
