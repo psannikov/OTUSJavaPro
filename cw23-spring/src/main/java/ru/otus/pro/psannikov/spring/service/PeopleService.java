@@ -12,14 +12,19 @@ import java.util.concurrent.atomic.AtomicLong;
 @Service
 public class PeopleService {
     Map<Long, Person> personMap = new HashMap<>();
+    Map<String, Person> nameMap = new HashMap<>();
     AtomicLong ctr = new AtomicLong();
 
     public Person addPerson(Person person) {
+        if (nameMap.containsKey(person.getName())) {
+            return nameMap.get(person.getName());
+        }
         if (person.getId() == null) {
             person.setId(ctr.incrementAndGet());
         }
 
         personMap.put(person.getId(), person);
+        nameMap.put(person.getName(),person);
         return person;
     }
 

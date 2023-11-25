@@ -1,17 +1,16 @@
 package ru.otus.pro.psannikov.jetty.handlers.auth;
 
+import lombok.Getter;
+
 import java.util.Objects;
 
 
 public class Token {
+    @Getter
     private final String token;
 
     public Token(final String token) {
         this.token = token;
-    }
-
-    public String getToken() {
-        return token;
     }
 
     @Override
