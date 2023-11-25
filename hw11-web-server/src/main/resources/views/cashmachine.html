@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+Person name <p th:text="${name}">Name</p>
+<p th:text="${time}">Time</p>
+
+<form action="cashmachine" method="post">
+    <fieldset>
+        <input type="number" name="CardNumber"/>
+        <input type="password" name="PIN"/>
+        <input type="number" name="Value"/>
+        <input type="password" name="NewPIN"/>
+        <input type="submit" value="GetMoney"/>
+        <input type="submit" value="PutMoney"/>
+        <input type="submit" value="CheckBalance"/>
+        <input type="submit" value="ChangePin"/>
+    </fieldset>
+</form>
+
+</body>
+</html>
