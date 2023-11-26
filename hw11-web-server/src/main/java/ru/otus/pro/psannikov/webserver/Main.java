@@ -2,6 +2,8 @@ package ru.otus.pro.psannikov.webserver;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
 import ru.otus.pro.psannikov.webserver.cashmachine.bank.dao.AccountDao;
 import ru.otus.pro.psannikov.webserver.cashmachine.bank.dao.CardsDao;
@@ -20,22 +22,23 @@ import ru.otus.pro.psannikov.webserver.cashmachine.machine.service.impl.MoneyBox
 @ComponentScan
 @EnableAutoConfiguration
 public class Main {
-    static AccountDao accountDao = new AccountDao();
-    static AccountService accountService;
-    static CardsDao cardsDao;
-    static CardService cardService;
-    static MoneyBoxService moneyBoxService;
-    static CashMachineService cashMachineService;
-    static {
-        accountService = new AccountServiceImpl(accountDao);
-        cardsDao = new CardsDao();
-        cardService = new CardServiceImpl(accountService, cardsDao);
-        moneyBoxService = new MoneyBoxServiceImpl();
-        cashMachineService = new CashMachineServiceImpl(cardService, accountService, moneyBoxService);
-    }
+//    static AccountDao accountDao = new AccountDao();
+//    static AccountService accountService;
+//    static CardsDao cardsDao;
+//    static CardService cardService;
+//    static MoneyBoxService moneyBoxService;
+//    static CashMachineService cashMachineService;
+//    static {
+//        accountService = new AccountServiceImpl(accountDao);
+//        cardsDao = new CardsDao();
+//        cardService = new CardServiceImpl(accountService, cardsDao);
+//        moneyBoxService = new MoneyBoxServiceImpl();
+//        cashMachineService = new CashMachineServiceImpl(cardService, accountService, moneyBoxService);
+//    }
     public static void main(String[] args) {
-        MoneyBox moneyBox = new MoneyBox();
-        CashMachine cashMachine = new CashMachine(moneyBox);
+        ApplicationContext context = new AnnotationConfigApplicationContext(Main.class);
+//        MoneyBox moneyBox = new MoneyBox();
+//        CashMachine cashMachine = new CashMachine(moneyBox);
 
         SpringApplication.run(Main.class, args);
     }

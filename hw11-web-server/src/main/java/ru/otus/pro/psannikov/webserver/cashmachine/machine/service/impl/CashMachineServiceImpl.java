@@ -1,5 +1,6 @@
 package ru.otus.pro.psannikov.webserver.cashmachine.machine.service.impl;
 
+import org.springframework.stereotype.Service;
 import ru.otus.pro.psannikov.webserver.cashmachine.bank.service.AccountService;
 import ru.otus.pro.psannikov.webserver.cashmachine.bank.service.CardService;
 import ru.otus.pro.psannikov.webserver.cashmachine.machine.data.CashMachine;
@@ -10,7 +11,7 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-
+@Service
 public class CashMachineServiceImpl implements CashMachineService {
 
     private CardService cardService;

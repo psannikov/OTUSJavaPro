@@ -1,9 +1,10 @@
 package ru.otus.pro.psannikov.webserver.cashmachine.bank.dao;
 
+import org.springframework.stereotype.Service;
 import ru.otus.pro.psannikov.webserver.cashmachine.bank.data.Account;
 import ru.otus.pro.psannikov.webserver.cashmachine.bank.db.Accounts;
 
-
+@Service
 public class AccountDao {
     public Account getAccount(Long accountId) {
         if (!Accounts.accounts.containsKey(accountId)) {

@@ -1,11 +1,13 @@
 package ru.otus.pro.psannikov.webserver.cashmachine.bank.service.impl;
 
+import org.springframework.stereotype.Service;
 import ru.otus.pro.psannikov.webserver.cashmachine.bank.dao.AccountDao;
 import ru.otus.pro.psannikov.webserver.cashmachine.bank.data.Account;
 import ru.otus.pro.psannikov.webserver.cashmachine.bank.service.AccountService;
 
 import java.math.BigDecimal;
 
+@Service
 public class AccountServiceImpl implements AccountService {
     AccountDao accountDao;
 

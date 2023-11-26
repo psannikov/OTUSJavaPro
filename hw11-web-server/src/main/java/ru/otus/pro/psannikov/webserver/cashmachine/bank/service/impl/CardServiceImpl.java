@@ -1,5 +1,6 @@
 package ru.otus.pro.psannikov.webserver.cashmachine.bank.service.impl;
 
+import org.springframework.stereotype.Service;
 import ru.otus.pro.psannikov.webserver.cashmachine.bank.dao.CardsDao;
 import ru.otus.pro.psannikov.webserver.cashmachine.bank.data.Card;
 import ru.otus.pro.psannikov.webserver.cashmachine.bank.service.AccountService;
@@ -10,7 +11,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.HexFormat;
 
-
+@Service
 public class CardServiceImpl implements CardService {
     AccountService accountService;
 

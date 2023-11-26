@@ -1,5 +1,6 @@
 package ru.otus.pro.psannikov.webserver.cashmachine.machine.service.impl;
 
+import org.springframework.stereotype.Service;
 import ru.otus.pro.psannikov.webserver.cashmachine.machine.data.MoneyBox;
 import ru.otus.pro.psannikov.webserver.cashmachine.machine.service.MoneyBoxService;
 
@@ -7,7 +8,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-
+@Service
 public class MoneyBoxServiceImpl implements MoneyBoxService {
 
 
