@@ -1,9 +1,9 @@
 package ru.otus.pro.psannikov.di;
 
-import ru.otus.appcontainer.AppComponentsContainerImpl;
-import ru.otus.appcontainer.api.AppComponentsContainer;
-import ru.otus.config.AppConfig;
-import ru.otus.services.GameProcessor;
+import ru.otus.pro.psannikov.di.appcontainer.AppComponentsContainerImpl;
+import ru.otus.pro.psannikov.di.appcontainer.api.AppComponentsContainer;
+import ru.otus.pro.psannikov.di.config.AppConfig;
+import ru.otus.pro.psannikov.di.services.GameProcessor;
 
 /*
 В классе AppComponentsContainerImpl реализовать обработку, полученной в конструкторе конфигурации,
@@ -22,20 +22,24 @@ PS Приложение представляет собой тренажер т�
 public class App {
 
     public static void main(String[] args) throws Exception {
-        // Опциональные варианты
-        //AppComponentsContainer container = new AppComponentsContainerImpl(AppConfig1.class, AppConfig2.class);
+        try {
+            // Опциональные варианты
+            //AppComponentsContainer container = new AppComponentsContainerImpl(AppConfig1.class, AppConfig2.class);
 
-        // Тут можно использовать библиотеку Reflections (см. зависимости)
-        //AppComponentsContainer container = new AppComponentsContainerImpl("ru.otus.config");
+            // Тут можно использовать библиотеку Reflections (см. зависимости)
+            //AppComponentsContainer container = new AppComponentsContainerImpl("ru.otus.config");
 
-        // Обязательный вариант
-        AppComponentsContainer container = new AppComponentsContainerImpl(AppConfig.class);
+            // Обязательный вариант
+            AppComponentsContainer container = new AppComponentsContainerImpl(AppConfig.class);
 
-        // Приложение должно работать в каждом из указанных ниже вариантов
-        GameProcessor gameProcessor = container.getAppComponent(GameProcessor.class);
-        //GameProcessor gameProcessor = container.getAppComponent(GameProcessorImpl.class);
-        //GameProcessor gameProcessor = container.getAppComponent("gameProcessor");
+            // Приложение должно работать в каждом из указанных ниже вариантов
+            GameProcessor gameProcessor = container.getAppComponent(GameProcessor.class);
+            //GameProcessor gameProcessor = container.getAppComponent(GameProcessorImpl.class);
+            //GameProcessor gameProcessor = container.getAppComponent("gameProcessor");
 
-        gameProcessor.startGame();
+            gameProcessor.startGame();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 }
