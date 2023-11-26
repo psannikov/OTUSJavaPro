@@ -1,0 +1,143 @@
+{
+	"info": {
+		"_postman_id": "719e9f81-8383-4692-9060-0357e7fea780",
+		"name": "Otus Web Server Test",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "5703010"
+	},
+	"item": [
+		{
+			"name": "GetToken",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "login",
+							"value": "service",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "password",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:9090/auth",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9090",
+					"path": [
+						"auth"
+					],
+					"query": [
+						{
+							"key": "login ",
+							"value": null,
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CheckToken",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:9090/auth?token=1c2VydmljZS1zZXJ2aWNlZGF0YQ==",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9090",
+					"path": [
+						"auth"
+					],
+					"query": [
+						{
+							"key": "token",
+							"value": "1c2VydmljZS1zZXJ2aWNlZGF0YQ=="
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Info",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:9191/info",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9191",
+					"path": [
+						"info"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Person",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:9191/info",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9191",
+					"path": [
+						"info"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Person Add",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \"name\":\"Sam\", \"address\":\"some street 1\"}"
+				},
+				"url": {
+					"raw": "http://localhost:9191/person",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9191",
+					"path": [
+						"person"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
