@@ -3,6 +3,7 @@ package ru.otus.pro.psannikov.webserver.cashmachine.bank.dao;
 import org.springframework.stereotype.Service;
 import ru.otus.pro.psannikov.webserver.cashmachine.bank.data.Card;
 import ru.otus.pro.psannikov.webserver.cashmachine.bank.db.Cards;
+
 @Service
 public class CardsDao {
     public Card getCardByNumber(String cardNumber) {
