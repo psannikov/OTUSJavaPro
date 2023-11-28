@@ -15,14 +15,17 @@ import java.util.List;
 
 @Controller
 public class SomeDataController {
-    @Autowired
-    CashMachineService cashMachineService;
-    @Autowired
-    CashMachine cashMachine;
+    private final CashMachineService cashMachineService;
+    private final CashMachine cashMachine;
+    private final String endpoint = "cachmachine";
+    public SomeDataController(CashMachine cashMachine, CashMachineService cashMachineService) {
+        this.cashMachineService = cashMachineService;
+        this.cashMachine = cashMachine;
+    }
 
-    @GetMapping(value = "cachmachine")
+    @GetMapping(value = endpoint)
     public String getMoney(Model model) {
-        return "cachmachine";
+        return endpoint;
     }
 
     @PostMapping(value = "getmoney")
@@ -32,20 +35,18 @@ public class SomeDataController {
         model.addAttribute("value", value);
         List<Integer> takenAmount = cashMachineService.getMoney(cashMachine, card, pin, BigDecimal.valueOf(value));
         model.addAttribute("takenAmount", takenAmount);
-        return "cachmachine";
+        return endpoint;
     }
 
     @PostMapping(value = "putmoney")
     public String putMoney(Model model, String card, String pin, Integer count100, Integer count500, Integer count1000, Integer count5000) {
         model.addAttribute("card", card);
         model.addAttribute("pin", pin);
-        System.out.println(count100);
-        System.out.println(count500);
-        System.out.println(count1000);
-        System.out.println(count5000);
-        cashMachineService.putMoney(cashMachine, card, pin, Arrays.asList(count5000, count1000, count500, count100));
-        model.addAttribute("putAmount", count100 * 100 + count500 * 500 + count1000 * 1000 + count5000 * 5000);
-        return "cachmachine";
+        List notes = Arrays.asList(count5000, count1000, count500, count100);
+        Integer putAmount = count100 * 100 + count500 * 500 + count1000 * 1000 + count5000 * 5000;
+        cashMachineService.putMoney(cashMachine, card, pin, notes);
+        model.addAttribute("putAmount", putAmount);
+        return endpoint;
     }
 
     @PostMapping(value = "checkbalance")
@@ -54,7 +55,7 @@ public class SomeDataController {
         model.addAttribute("pin", pin);
         BigDecimal balance = cashMachineService.checkBalance(cashMachine, card, pin);
         model.addAttribute("balance", balance);
-        return "cachmachine";
+        return endpoint;
     }
 
     @PostMapping(value = "cahngepin")
@@ -63,6 +64,6 @@ public class SomeDataController {
         model.addAttribute("pin", pin);
         cashMachineService.changePin(card, pin, newpin);
         model.addAttribute("newpin", newpin);
-        return "cachmachine";
+        return endpoint;
     }
 }
