@@ -1,4 +1,4 @@
-package ru.otus.pro.psannikov.spring.boot.part1.controllers;
+package ru.otus.pro.psannikov.spring.boot.part1.diff;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;

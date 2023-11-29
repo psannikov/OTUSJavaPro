@@ -1,4 +1,4 @@
-package ru.otus.pro.psannikov.spring.boot.part1;
+package ru.otus.pro.psannikov.spring.boot.part1.diff;
 
 import jakarta.annotation.PostConstruct;
 import org.springframework.stereotype.Component;
