@@ -39,11 +39,11 @@ public class SomeDataController {
     }
 
     @PostMapping(value = "putmoney")
-    public String putMoney(Model model, String card, String pin, Integer count100, Integer count500, Integer count1000, Integer count5000) {
+    public String putMoney(Model model, String card, String pin, Integer value) {
         model.addAttribute("card", card);
         model.addAttribute("pin", pin);
-        List notes = Arrays.asList(count5000, count1000, count500, count100);
-        Integer putAmount = count100 * 100 + count500 * 500 + count1000 * 1000 + count5000 * 5000;
+        List<Integer> notes = getNotesByValue(value);
+        Integer putAmount = notes.get(0) * 100 + notes.get(1) * 500 + notes.get(2) * 1000 + notes.get(3) * 5000;
         cashMachineService.putMoney(cashMachine, card, pin, notes);
         model.addAttribute("putAmount", putAmount);
         return endpoint;
@@ -65,5 +65,14 @@ public class SomeDataController {
         cashMachineService.changePin(card, pin, newpin);
         model.addAttribute("newpin", newpin);
         return endpoint;
+    }
+    public List<Integer> getNotesByValue(int value) {
+        List<Integer> res = Arrays.asList(0, 0, 0, 0);
+        int [] notesVal = new int [] {100,500,1000,5000};
+        for (int i = res.size() - 1; i >=0; i--) {
+            res.set(i,value/notesVal[i]);
+            value = value%notesVal[i];
+        }
+        return res;
     }
 }

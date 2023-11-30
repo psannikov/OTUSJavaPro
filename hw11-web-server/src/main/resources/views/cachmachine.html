@@ -19,15 +19,12 @@
     </fieldset>
 </form>
 <p>Блок функционала пополнения счета</p>
-Укажите номер карты, PIN код и кол-во купюр (100, 500, 1000, 5000)
+Укажите номер карты, PIN код и сумму поплнения
 <form action="putmoney" method="post">
     <fieldset>
         <input type="number" name="card"/>
         <input type="password" name="pin"/>
-        <input type="number" name="count100"/>
-        <input type="number" name="count500"/>
-        <input type="number" name="count1000"/>
-        <input type="number" name="count5000"/>
+        <input type="number" name="value"/>
         <input type="submit" value="Внести наличные"/>
         <p></p>
         <p>Прошло пополнение</p>>
