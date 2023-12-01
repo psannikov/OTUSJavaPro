@@ -1,6 +1,5 @@
 package ru.otus.pro.psannikov.webserver.websever.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,7 +16,12 @@ import java.util.List;
 public class SomeDataController {
     private final CashMachineService cashMachineService;
     private final CashMachine cashMachine;
-    private final String endpoint = "cachmachine";
+    private final static String endpoint = "cachmachine";
+    private final static int note100 = 100;
+    private final static int note500 = 500;
+    private final static int note1000 = 1000;
+    private final static int note5000 = 5000;
+
     public SomeDataController(CashMachine cashMachine, CashMachineService cashMachineService) {
         this.cashMachineService = cashMachineService;
         this.cashMachine = cashMachine;
@@ -43,7 +47,7 @@ public class SomeDataController {
         model.addAttribute("card", card);
         model.addAttribute("pin", pin);
         List<Integer> notes = getNotesByValue(value);
-        Integer putAmount = notes.get(0) * 100 + notes.get(1) * 500 + notes.get(2) * 1000 + notes.get(3) * 5000;
+        int putAmount = notes.get(0) * note100 + notes.get(1) * note500 + notes.get(2) * note1000 + notes.get(3) * note5000;
         cashMachineService.putMoney(cashMachine, card, pin, notes);
         model.addAttribute("putAmount", putAmount);
         return endpoint;
@@ -66,12 +70,13 @@ public class SomeDataController {
         model.addAttribute("newpin", newpin);
         return endpoint;
     }
+
     public List<Integer> getNotesByValue(int value) {
         List<Integer> res = Arrays.asList(0, 0, 0, 0);
-        int [] notesVal = new int [] {100,500,1000,5000};
-        for (int i = res.size() - 1; i >=0; i--) {
-            res.set(i,value/notesVal[i]);
-            value = value%notesVal[i];
+        int[] notesVal = new int[]{100, 500, 1000, 5000};
+        for (int i = res.size() - 1; i >= 0; i--) {
+            res.set(i, value / notesVal[i]);
+            value = value % notesVal[i];
         }
         return res;
     }

@@ -13,6 +13,7 @@ import java.util.HexFormat;
 
 @Service
 public class CardServiceImpl implements CardService {
+    private final static String  cardNoFound = "No card found";
     AccountService accountService;
 
     CardsDao cardsDao;
@@ -32,7 +33,7 @@ public class CardServiceImpl implements CardService {
         Card card = cardsDao.getCardByNumber(number);
 
         if (card == null) {
-            throw new IllegalArgumentException("No card found");
+            throw new IllegalArgumentException(cardNoFound);
         }
 
         try {
@@ -50,7 +51,7 @@ public class CardServiceImpl implements CardService {
         Card card = cardsDao.getCardByNumber(number);
 
         if (card == null) {
-            throw new IllegalArgumentException("No card found");
+            throw new IllegalArgumentException(cardNoFound);
         }
 
         checkPin(card, pin);
@@ -62,7 +63,7 @@ public class CardServiceImpl implements CardService {
         Card card = cardsDao.getCardByNumber(number);
 
         if (card == null) {
-            throw new IllegalArgumentException("No card found");
+            throw new IllegalArgumentException(cardNoFound);
         }
         checkPin(card, pin);
         return accountService.putMoney(card.getAccountId(), sum);
@@ -73,7 +74,7 @@ public class CardServiceImpl implements CardService {
         Card card = cardsDao.getCardByNumber(number);
 
         if (card == null) {
-            throw new IllegalArgumentException("No card found");
+            throw new IllegalArgumentException(cardNoFound);
         }
         checkPin(card, pin);
         return accountService.checkBalance(card.getId());
@@ -89,8 +90,7 @@ public class CardServiceImpl implements CardService {
         try {
             MessageDigest digest = MessageDigest.getInstance("SHA1");
             digest.update(value.getBytes());
-            String result = HexFormat.of().formatHex(digest.digest());
-            return result;
+            return HexFormat.of().formatHex(digest.digest());
         } catch (NoSuchAlgorithmException e) {
             throw new RuntimeException(e);
         }
