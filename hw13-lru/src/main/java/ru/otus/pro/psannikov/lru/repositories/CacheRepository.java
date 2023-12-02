@@ -1,9 +1,11 @@
 package ru.otus.pro.psannikov.lru.repositories;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import ru.otus.pro.psannikov.lru.entities.LruCache;
+import ru.otus.pro.psannikov.lru.etities.Cache;
 
-public interface CacheRepository extends JpaRepository<LruCache, String> {
+import java.util.Optional;
 
-    void deleteByKey(String key);
+public interface CacheRepository extends JpaRepository<Cache, Long> {
+    void deleteByKey(String cacheKey);
+    Cache findByKey(String cacheKey);
 }

@@ -19,6 +19,7 @@ dependencies {
     annotationProcessor("org.projectlombok:lombok:1.18.30")
     compileOnly("org.projectlombok:lombok:1.18.30")
     implementation("org.springframework.boot:spring-boot-starter-data-jpa:3.2.0")
+    implementation ("org.flywaydb:flyway-core")
     implementation("org.springframework.boot:spring-boot-starter-web:3.2.0")
 }
 
