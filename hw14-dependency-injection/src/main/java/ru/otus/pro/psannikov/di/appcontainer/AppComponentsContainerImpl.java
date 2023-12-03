@@ -21,7 +21,7 @@ public class AppComponentsContainerImpl implements AppComponentsContainer {
         for (Method method : configClass.getDeclaredMethods()) {
             if (method.isAnnotationPresent(AppComponent.class)) {
                 appComponents.add(method);
-                appComponentsByName.put(method.getAnnotation(AppComponent.class).name(), method);
+//                appComponentsByName.put(method.getAnnotation(AppComponent.class).name().toLowerCase(), method);
             }
         }
         for (int i = 0; i < appComponents.size(); i++) {
@@ -40,6 +40,7 @@ public class AppComponentsContainerImpl implements AppComponentsContainer {
                                                 .findFirst()
                                                 .map(m -> {
                                                     try {
+                                                        System.out.println("configClass.newInstance()" + method);
                                                         return m.invoke(configClass.newInstance());
                                                     } catch (Exception e) {
                                                         throw new RuntimeException("Error invoking method " + m.getName(), e);
@@ -51,8 +52,8 @@ public class AppComponentsContainerImpl implements AppComponentsContainer {
                                     }
                                 })
                                 .toArray();
-
-                        method.invoke(configClass.newInstance(), args);
+//                        System.out.println(args);
+                        appComponentsByName.put(method.getAnnotation(AppComponent.class).name().toLowerCase(),method.invoke(configClass.newInstance(), args));
                         System.out.println("Вызов метода " + method);
                     } catch (Exception e) {
                         throw new RuntimeException("Error invoking method " + method.getName(), e);
@@ -70,7 +71,10 @@ public class AppComponentsContainerImpl implements AppComponentsContainer {
 
     @Override
     public <C> C getAppComponent(Class<C> componentClass) {
-        return null;
+        System.out.println(appComponentsByName.keySet());
+        System.out.println(componentClass.getSimpleName());
+        System.out.println(appComponentsByName.get(componentClass.getSimpleName().toLowerCase()));
+        return (C) appComponentsByName.get(componentClass.getSimpleName().toLowerCase());
     }
 
     @Override
