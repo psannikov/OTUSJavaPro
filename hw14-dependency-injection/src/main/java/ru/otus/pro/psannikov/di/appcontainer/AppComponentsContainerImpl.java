@@ -4,63 +4,63 @@ import ru.otus.pro.psannikov.di.appcontainer.api.AppComponent;
 import ru.otus.pro.psannikov.di.appcontainer.api.AppComponentsContainer;
 import ru.otus.pro.psannikov.di.appcontainer.api.AppComponentsContainerConfig;
 
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.*;
+import java.lang.reflect.Parameter;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class AppComponentsContainerImpl implements AppComponentsContainer {
 
     private final List<Method> appComponents = new ArrayList<>();
     private final Map<String, Object> appComponentsByName = new HashMap<>();
 
-    public AppComponentsContainerImpl(Class<?> initialConfigClass) {
+    public AppComponentsContainerImpl(Class<?> initialConfigClass) throws InvocationTargetException, InstantiationException, IllegalAccessException {
         processConfig(initialConfigClass);
     }
 
-    private void processConfig(Class<?> configClass) {
+    private void processConfig(Class<?> configClass) throws InstantiationException, IllegalAccessException, InvocationTargetException {
         checkConfigClass(configClass);
         for (Method method : configClass.getDeclaredMethods()) {
             if (method.isAnnotationPresent(AppComponent.class)) {
                 appComponents.add(method);
-//                appComponentsByName.put(method.getAnnotation(AppComponent.class).name().toLowerCase(), method);
             }
         }
         for (int i = 0; i < appComponents.size(); i++) {
             for (Method method : appComponents) {
                 if (method.getAnnotation(AppComponent.class).order() == i) {
-                    System.out.println("i="+ i+ " method " + method);
-                    try {
-                        // Если метод принимает аргументы, то получаем их значения из других компонентов, помеченных аннотацией @AppComponent
-                        Object[] args = Arrays.stream(method.getParameters())
-                                .map(parameter -> {
-                                    if (parameter.isAnnotationPresent(AppComponent.class)) {
-                                        String componentName = parameter.getAnnotation(AppComponent.class).name();
-                                        return appComponents.stream()
-                                                .filter(m -> m.isAnnotationPresent(AppComponent.class))
-                                                .filter(m -> m.getAnnotation(AppComponent.class).name().equals(componentName))
-                                                .findFirst()
-                                                .map(m -> {
-                                                    try {
-                                                        System.out.println("configClass.newInstance()" + method);
-                                                        return m.invoke(configClass.newInstance());
-                                                    } catch (Exception e) {
-                                                        throw new RuntimeException("Error invoking method " + m.getName(), e);
-                                                    }
-                                                })
-                                                .orElseThrow(() -> new RuntimeException("Component " + componentName + " not found"));
-                                    } else {
-                                        return null;
-                                    }
-                                })
-                                .toArray();
-//                        System.out.println(args);
-                        appComponentsByName.put(method.getAnnotation(AppComponent.class).name().toLowerCase(),method.invoke(configClass.newInstance(), args));
-                        System.out.println("Вызов метода " + method);
-                    } catch (Exception e) {
-                        throw new RuntimeException("Error invoking method " + method.getName(), e);
+                    System.out.println("Сортирова " + method + " " + method.getAnnotation(AppComponent.class).order());
+                    System.out.println("Метод " + method);
+                    Parameter[] params = method.getParameters();
+                    List<Object> args = new ArrayList<>();
+                    for (Parameter parameter : params) {
+                        args.add(appComponentsByName.get(parameter.getType().getSimpleName().toLowerCase()));
+                    }
+                    if (args.isEmpty()) {
+                        System.out.println("Создание экземпляра без параметров, вызов метода " + method.getName());
+                        var obj = method.invoke(configClass.newInstance());
+                        appComponentsByName.put(method.getName().toLowerCase(), obj);
+                        System.out.println("Содержимое appComponentsByName " + appComponentsByName);
+                    } else {
+                        System.out.println("args " + args);
+                        try {
+                            var obj = method.invoke(configClass.newInstance(), args);
+                            appComponentsByName.put(method.getName().toLowerCase(), obj);
+                        } catch (Exception e) {
+                            System.out.println(e.getMessage());
+                        }
+//                    var obj = (args.isEmpty()) ? method.invoke(configClass.newInstance()) : method.invoke(configClass.newInstance(), args);
+//                    appComponentsByName.put(method.getName().toLowerCase(), obj);
                     }
                 }
+
             }
+            System.out.println("=".repeat(30));
         }
+        System.out.println("appComponentsByName содержит элементов " + appComponentsByName.size());
+        System.out.println(appComponentsByName);
     }
 
     private void checkConfigClass(Class<?> configClass) {
@@ -71,14 +71,13 @@ public class AppComponentsContainerImpl implements AppComponentsContainer {
 
     @Override
     public <C> C getAppComponent(Class<C> componentClass) {
-        System.out.println(appComponentsByName.keySet());
-        System.out.println(componentClass.getSimpleName());
-        System.out.println(appComponentsByName.get(componentClass.getSimpleName().toLowerCase()));
+        System.out.println("Вызов метода getAppComponent(Class<C> componentClass)");
         return (C) appComponentsByName.get(componentClass.getSimpleName().toLowerCase());
     }
 
     @Override
     public <C> C getAppComponent(String componentName) {
+        System.out.println("Вызов метода getAppComponent(String componentName)");
         return null;
     }
 }
