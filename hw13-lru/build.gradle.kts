@@ -2,6 +2,7 @@ plugins {
     id("java")
     id("org.springframework.boot") version ("3.2.0")
     id("io.spring.dependency-management") version ("1.1.4")
+    id("com.github.johnrengelman.shadow") version "7.1.0"
 
 }
 
@@ -22,7 +23,14 @@ dependencies {
     implementation ("org.flywaydb:flyway-core")
     implementation("org.springframework.boot:spring-boot-starter-web:3.2.0")
 }
-
+tasks.shadowJar {
+    archiveBaseName.set("LruCache")
+    archiveVersion.set("0.1")
+    archiveClassifier.set("")
+    manifest {
+        attributes ["Main-Class"] = "ru.otus.pro.psannikov.lru.Main"
+    }
+}
 tasks.test {
     useJUnitPlatform()
 }
