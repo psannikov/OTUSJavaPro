@@ -1,0 +1,13 @@
+server:
+  servlet:
+    context-path: /
+  port: 8082
+
+springdoc:
+
+  api-docs:
+    path: /api-docs
+
+  swagger-ui:
+    filter: true
+    path: /swagger
