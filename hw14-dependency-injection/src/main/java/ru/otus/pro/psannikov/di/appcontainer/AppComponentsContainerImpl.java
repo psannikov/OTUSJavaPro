@@ -3,6 +3,8 @@ package ru.otus.pro.psannikov.di.appcontainer;
 import ru.otus.pro.psannikov.di.appcontainer.api.AppComponent;
 import ru.otus.pro.psannikov.di.appcontainer.api.AppComponentsContainer;
 import ru.otus.pro.psannikov.di.appcontainer.api.AppComponentsContainerConfig;
+import ru.otus.pro.psannikov.di.config.AppConfig;
+import ru.otus.pro.psannikov.di.services.IOServiceStreams;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -38,22 +40,10 @@ public class AppComponentsContainerImpl implements AppComponentsContainer {
                     for (Parameter parameter : params) {
                         args.add(appComponentsByName.get(parameter.getType().getSimpleName().toLowerCase()));
                     }
-                    if (args.isEmpty()) {
-                        System.out.println("Создание экземпляра без параметров, вызов метода " + method.getName());
-                        var obj = method.invoke(configClass.newInstance());
-                        appComponentsByName.put(method.getName().toLowerCase(), obj);
-                        System.out.println("Содержимое appComponentsByName " + appComponentsByName);
-                    } else {
-                        System.out.println("args " + args);
-                        try {
-                            var obj = method.invoke(configClass.newInstance(), args);
-                            appComponentsByName.put(method.getName().toLowerCase(), obj);
-                        } catch (Exception e) {
-                            System.out.println(e.getMessage());
-                        }
-//                    var obj = (args.isEmpty()) ? method.invoke(configClass.newInstance()) : method.invoke(configClass.newInstance(), args);
-//                    appComponentsByName.put(method.getName().toLowerCase(), obj);
-                    }
+                    Object[] argsArray = args.toArray();
+                    var obj = method.invoke(configClass.newInstance(), argsArray);
+                    appComponentsByName.put(method.getName().toLowerCase(), obj);
+                    System.out.println("Содержимое appComponentsByName " + appComponentsByName);
                 }
 
             }
