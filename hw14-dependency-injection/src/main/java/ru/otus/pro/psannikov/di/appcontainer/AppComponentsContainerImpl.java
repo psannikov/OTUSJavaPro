@@ -3,8 +3,6 @@ package ru.otus.pro.psannikov.di.appcontainer;
 import ru.otus.pro.psannikov.di.appcontainer.api.AppComponent;
 import ru.otus.pro.psannikov.di.appcontainer.api.AppComponentsContainer;
 import ru.otus.pro.psannikov.di.appcontainer.api.AppComponentsContainerConfig;
-import ru.otus.pro.psannikov.di.config.AppConfig;
-import ru.otus.pro.psannikov.di.services.IOServiceStreams;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -33,8 +31,6 @@ public class AppComponentsContainerImpl implements AppComponentsContainer {
         for (int i = 0; i < appComponents.size(); i++) {
             for (Method method : appComponents) {
                 if (method.getAnnotation(AppComponent.class).order() == i) {
-                    System.out.println("Сортирова " + method + " " + method.getAnnotation(AppComponent.class).order());
-                    System.out.println("Метод " + method);
                     Parameter[] params = method.getParameters();
                     List<Object> args = new ArrayList<>();
                     for (Parameter parameter : params) {
@@ -43,14 +39,9 @@ public class AppComponentsContainerImpl implements AppComponentsContainer {
                     Object[] argsArray = args.toArray();
                     var obj = method.invoke(configClass.newInstance(), argsArray);
                     appComponentsByName.put(method.getName().toLowerCase(), obj);
-                    System.out.println("Содержимое appComponentsByName " + appComponentsByName);
                 }
-
             }
-            System.out.println("=".repeat(30));
         }
-        System.out.println("appComponentsByName содержит элементов " + appComponentsByName.size());
-        System.out.println(appComponentsByName);
     }
 
     private void checkConfigClass(Class<?> configClass) {
@@ -61,13 +52,11 @@ public class AppComponentsContainerImpl implements AppComponentsContainer {
 
     @Override
     public <C> C getAppComponent(Class<C> componentClass) {
-        System.out.println("Вызов метода getAppComponent(Class<C> componentClass)");
         return (C) appComponentsByName.get(componentClass.getSimpleName().toLowerCase());
     }
 
     @Override
     public <C> C getAppComponent(String componentName) {
-        System.out.println("Вызов метода getAppComponent(String componentName)");
         return null;
     }
 }
