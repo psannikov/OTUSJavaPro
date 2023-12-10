@@ -5,6 +5,8 @@ import org.springframework.data.annotation.PersistenceCreator;
 import org.springframework.data.relational.core.mapping.MappedCollection;
 import org.springframework.data.relational.core.mapping.Table;
 
+import java.util.Set;
+
 @Table("BOOKS")
 public class Book {
     @Id
@@ -14,6 +16,8 @@ public class Book {
     private Genre genre;
     @MappedCollection(idColumn = "BOOK_ID")
     private BookDetails bookDetails;
+    @MappedCollection(idColumn = "BOOK_ID")
+    private Set<Review> reviews;
 
     public Long getId() {
         return id;

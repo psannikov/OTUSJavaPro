@@ -2,9 +2,9 @@ package ru.otus.pro.psannikov.spring.data.jdbc.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import ru.flamexander.spring.data.jdbc.demo.dtos.CreateOrUpdateCategoryDtoRq;
-import ru.flamexander.spring.data.jdbc.demo.entities.Category;
-import ru.flamexander.spring.data.jdbc.demo.repositories.CategoriesRepository;
+import ru.otus.pro.psannikov.spring.data.jdbc.dtos.CreateOrUpdateCategoryDtoRq;
+import ru.otus.pro.psannikov.spring.data.jdbc.entities.Category;
+import ru.otus.pro.psannikov.spring.data.jdbc.repositories.CategoriesRepository;
 
 import java.util.List;
 import java.util.Optional;

@@ -1,6 +1,6 @@
 package ru.otus.pro.psannikov.spring.data.jdbc.dtos;
 
-import ru.flamexander.spring.data.jdbc.demo.entities.Genre;
+import ru.otus.pro.psannikov.spring.data.jdbc.entities.Genre;
 
 public class DetailedBookDto {
     private Long id;
@@ -8,6 +8,15 @@ public class DetailedBookDto {
     private Genre genre;
     private String authorName;
     private String description;
+    private Float avgRating;
+
+    public Float getAvgRating() {
+        return avgRating;
+    }
+
+    public void setAvgRating(Float avgRating) {
+        this.avgRating = avgRating;
+    }
 
     public Long getId() {
         return id;

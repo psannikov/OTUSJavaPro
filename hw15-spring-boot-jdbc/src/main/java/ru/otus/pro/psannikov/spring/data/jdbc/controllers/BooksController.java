@@ -2,8 +2,9 @@ package ru.otus.pro.psannikov.spring.data.jdbc.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import ru.flamexander.spring.data.jdbc.demo.dtos.DetailedBookDto;
-import ru.flamexander.spring.data.jdbc.demo.services.BooksService;
+import ru.otus.pro.psannikov.spring.data.jdbc.dtos.DetailedBookDto;
+import ru.otus.pro.psannikov.spring.data.jdbc.dtos.PageDto;
+import ru.otus.pro.psannikov.spring.data.jdbc.services.BooksService;
 
 import java.util.List;
 
@@ -18,8 +19,18 @@ public class BooksController {
     }
 
     @GetMapping
-    public List<DetailedBookDto> findAllDetailedBooks() {
-        return booksService.findAllDetailedBooks();
+    public PageDto findAllDetailedBooksPageDto(@RequestParam(defaultValue = "100") Long bookByPage, @RequestParam(defaultValue = "1") Long page) {
+        return booksService.findAllDetailedBooksPageDto(bookByPage, page);
+    }
+
+    @GetMapping("/{id}")
+    public DetailedBookDto findDetailedBooksById(@PathVariable Long id) {
+        return booksService.findDetailedBooksById(id);
+    }
+
+    @GetMapping("/top10")
+    public List<DetailedBookDto> findTop10BookByReview() {
+        return booksService.findTop10BookByReview();
     }
 
     @PatchMapping("/{id}/title")

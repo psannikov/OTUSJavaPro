@@ -4,8 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import ru.flamexander.spring.data.jdbc.demo.dtos.DetailedBookDto;
-import ru.flamexander.spring.data.jdbc.demo.services.BooksService;
+import ru.otus.pro.psannikov.spring.data.jdbc.dtos.DetailedBookDto;
+import ru.otus.pro.psannikov.spring.data.jdbc.services.BooksService;
 
 import java.util.List;
 
