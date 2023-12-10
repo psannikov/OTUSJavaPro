@@ -11,6 +11,7 @@ import ru.otus.pro.psannikov.di.config.AppConfig;
 import ru.otus.pro.psannikov.di.services.*;
 
 import java.io.PrintStream;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Modifier;
 import java.util.Arrays;
 import java.util.Scanner;
@@ -77,7 +78,7 @@ class AppTest {
 
     @DisplayName("При попытке достать из контекста отсутствующий или дублирующийся компонент, должно выкидываться исключение")
     @Test
-    public void shouldThrowExceptionWhenContainerContainsMoreThanOneOrNoneExpectedComponents() {
+    public void shouldThrowExceptionWhenContainerContainsMoreThanOneOrNoneExpectedComponents() throws Exception {
         var ctx = new AppComponentsContainerImpl(ConfigWithTwoSameComponents.class);
 
         assertThatCode(()-> ctx.getAppComponent(EquationPreparer.class))
@@ -109,12 +110,12 @@ class AppTest {
     @AppComponentsContainerConfig(order = 1)
     public static class ConfigWithTwoSameComponents{
 
-        @AppComponent(order = 1, name = "equationPreparer1")
+        @AppComponent(order = 1, name = "equationPreparer123")
         public EquationPreparer equationPreparer1() {
             return new EquationPreparerImpl();
         }
 
-        @AppComponent(order = 1, name = "equationPreparer2")
+        @AppComponent(order = 1, name = "equationPreparer235")
         public EquationPreparer equationPreparer2() {
             return new EquationPreparerImpl();
         }
