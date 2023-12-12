@@ -29,8 +29,7 @@ public class BooksService {
         Long countBooks = booksRepository.count();
         Long countPage = countBooks / bookByPage + 1;
         List<DetailedBookDto> detailedBookDtos = booksRepository.findAllDetailedBooksPagin(bookByPage, page);
-        PageDto pageDto = new PageDto(detailedBookDtos, countBooks, page, bookByPage, countPage);
-        return pageDto;
+        return new PageDto(detailedBookDtos, countBooks, page, bookByPage, countPage);
     }
 
     public DetailedBookDto findDetailedBooksById(Long id) {

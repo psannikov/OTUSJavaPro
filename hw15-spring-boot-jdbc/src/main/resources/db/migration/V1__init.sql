@@ -57,6 +57,26 @@ order by
 limit
     10;
 
+create view v_books as
+select
+    b.id,
+    b.title,
+    b.genre,
+    a.full_name as author_name,
+    bd.description,
+    COALESCE(avg(r.rating), 0) as avg_rating
+from
+    BOOKS b
+    left join AUTHORS a on b.author_id = a.id
+    left join BOOKS_DETAILS bd on bd.book_id = b.id
+    left join REVIEWS r on r.book_id = b.id
+group by
+    b.id,
+    b.title,
+    b.genre,
+    a.full_name,
+    bd.description;
+
 insert into
     categories (title)
 values
