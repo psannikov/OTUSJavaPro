@@ -6,9 +6,9 @@ server:
     key-store: otus1.p12
     key-store-password: 123456
     key-alias: otus
-#  truststore:
-#    store: truststore.p12
-#    password: 123456
+  truststore:
+    store: truststore.p12
+    password: 123456
 logging:
   level:
     root: debug
