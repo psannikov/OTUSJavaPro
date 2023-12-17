@@ -23,6 +23,8 @@ dependencies {
     implementation("org.flywaydb:flyway-core:10.3.0")
     compileOnly("org.projectlombok:lombok:1.18.30")
     runtimeOnly("com.h2database:h2:2.2.224")
+    implementation ("org.springframework.boot:spring-boot-starter-security:3.2.0")
+    implementation ("org.apache.httpcomponents.client5:httpclient5:5.3")
 }
 
 tasks.test {
