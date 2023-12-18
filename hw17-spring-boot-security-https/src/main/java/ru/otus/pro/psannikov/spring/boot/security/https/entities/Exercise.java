@@ -1,5 +1,6 @@
 package ru.otus.pro.psannikov.spring.boot.security.https.entities;
 
+import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.PersistenceCreator;
 import org.springframework.data.relational.core.mapping.MappedCollection;
@@ -7,6 +8,7 @@ import org.springframework.data.relational.core.mapping.Table;
 
 import java.time.LocalDate;
 
+@Data
 @Table("EXERCISES")
 public class Exercise {
     @Id
@@ -25,46 +27,6 @@ public class Exercise {
         this.exerciseDate = exerciseDate;
         this.subject = subject;
         this.costumer = costumer;
-        this.teacher = teacher;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public LocalDate getExerciseDate() {
-        return exerciseDate;
-    }
-
-    public void setExerciseDate(LocalDate exerciseDate) {
-        this.exerciseDate = exerciseDate;
-    }
-
-    public Subject getSubject() {
-        return subject;
-    }
-
-    public void setSubject(Subject subject) {
-        this.subject = subject;
-    }
-
-    public Costumer getCostumer() {
-        return costumer;
-    }
-
-    public void setCostumer(Costumer costumer) {
-        this.costumer = costumer;
-    }
-
-    public Teacher getTeacher() {
-        return teacher;
-    }
-
-    public void setTeacher(Teacher teacher) {
         this.teacher = teacher;
     }
 }
