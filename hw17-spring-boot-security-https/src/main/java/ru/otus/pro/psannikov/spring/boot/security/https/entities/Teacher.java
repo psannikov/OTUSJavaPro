@@ -8,7 +8,7 @@ import org.springframework.data.annotation.PersistenceCreator;
 import org.springframework.data.relational.core.mapping.Table;
 
 @Data
-@Table("TEACHERS")
+@Table("teachers")
 public class Teacher {
     @Id
     private Long id;

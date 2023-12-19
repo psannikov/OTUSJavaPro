@@ -9,7 +9,7 @@ import org.springframework.data.relational.core.mapping.Table;
 import java.time.LocalDate;
 
 @Data
-@Table("EXERCISES")
+@Table("exercises")
 public class Exercise {
     @Id
     private Long id;

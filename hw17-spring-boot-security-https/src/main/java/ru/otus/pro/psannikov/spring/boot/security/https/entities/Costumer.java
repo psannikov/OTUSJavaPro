@@ -8,7 +8,7 @@ import org.springframework.data.relational.core.mapping.Table;
 
 @Data
 @AccessType(AccessType.Type.PROPERTY)
-@Table("COSTUMERS")
+@Table("costumers")
 public class Costumer {
     @Id
     private Long id;

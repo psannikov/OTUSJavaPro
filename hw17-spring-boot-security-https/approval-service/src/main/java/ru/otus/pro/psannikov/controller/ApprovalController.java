@@ -14,8 +14,8 @@ public class ApprovalController {
     }
 
     @GetMapping()
-    public Approval getApproval(@RequestParam Long subject_id, @RequestParam Long costumer_id, @RequestParam Long teacher_id) {
-        return approvalService.getApproval(subject_id, costumer_id, teacher_id);
+    public Approval getApproval(@RequestParam String name) {
+        return approvalService.getApproval(name);
     }
 }
 

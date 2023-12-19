@@ -6,7 +6,7 @@ import org.springframework.data.annotation.PersistenceCreator;
 import org.springframework.data.relational.core.mapping.Table;
 
 @Data
-@Table("SUBJECTS")
+@Table("subjects")
 public class Subject {
     @Id
     private Long id;

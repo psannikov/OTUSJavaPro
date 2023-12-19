@@ -5,6 +5,8 @@ import ru.otus.pro.psannikov.data.Approval;
 import ru.otus.pro.psannikov.dtos.ApprovalDtoRq;
 import ru.otus.pro.psannikov.repositories.ApprovalRepository;
 
+import java.util.Optional;
+
 @Service
 public class ApprovalService {
     private final ApprovalRepository approvalRepository;
@@ -13,11 +15,9 @@ public class ApprovalService {
         this.approvalRepository = approvalRepository;
     }
 
-    public Approval getApproval(Long subject_id, Long costumer_id, Long teacher_id) {
-        ApprovalDtoRq approvalDtoRq = approvalRepository.checkDataToApprove(subject_id, costumer_id, teacher_id);
-        Boolean res = (approvalDtoRq.getSubjectId() == subject_id &&
-                approvalDtoRq.getCostumerId() == costumer_id &&
-                approvalDtoRq.getTeacherId() == teacher_id) ? true : false;
+    public Approval getApproval(String name) {
+        Optional<ApprovalDtoRq> approvalDtoRq = Optional.ofNullable(approvalRepository.checkDataToApprove(name));
+        Boolean res = (approvalDtoRq.isPresent()) ? false : true;
         return new Approval(res);
     }
 }
