@@ -24,7 +24,7 @@ create view v_exercises as
 select exercise_date, subject_id, costumer_id, teacher_id,
 s.name subject_name, s.description subject_description, s.number_of_hours,
 c.first_name costumer_first_name, c.second_name costumer_second_name,
-t.first_name teacher_first_name, t.second_name teacher_second_name,
+t.first_name teacher_first_name, t.second_name teacher_second_name
 from exercises e
 left join subjects s on e.subject_id=s.id
 left join costumers c on e.costumer_id=c.id

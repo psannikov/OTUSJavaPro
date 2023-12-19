@@ -1,13 +1,7 @@
 server:
-  port: 8189
+  port: 8181
   servlet:
     context-path: /app
-  ssl:
-    enabled: true
-    key-store-type: PKCS12
-    key-store: otus1.p12
-    key-store-password: 123456
-    key-alias: otus
 spring:
   datasource:
     platform: postgres
@@ -15,6 +9,14 @@ spring:
     url: jdbc:postgresql://localhost:5430/hwHttps
     username: usr
     password: pwd
+#  ssl:
+#    enabled: true
+#    key-store-type: PKCS12
+#    key-store: otusapi.p12
+#    key-store-password: 123456
+#    key-alias: otusapi
+
 logging:
   level:
-    org.springframework.jdbc.core.JdbcTemplate: TRACE
+    root: debug
+

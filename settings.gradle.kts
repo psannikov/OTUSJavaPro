@@ -50,3 +50,5 @@ include("hw13-lru")
 include("hw14-dependency-injection")
 include("hw15-spring-boot-jdbc")
 include("hw17-spring-boot-security-https")
+include("hw17-spring-boot-security-https:approval-service")
+findProject(":hw17-spring-boot-security-https:approval-service")?.name = "approval-service"

@@ -17,7 +17,6 @@ public class LibrarySecurityConfiguration {
     SecurityFilterChain configure(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.authorizeHttpRequests(registry -> {
             registry.requestMatchers("/api/v1/**").hasAnyAuthority("ADMIN");
-//            registry.requestMatchers("/exchange").hasAnyAuthority("USER");
         })
                 .csrf(csrf -> csrf.csrfTokenRepository(new HttpSessionCsrfTokenRepository()))
                 .formLogin(Customizer.withDefaults());
