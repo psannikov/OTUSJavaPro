@@ -12,15 +12,17 @@ import java.util.List;
 
 @Service
 public class LibraryUserService implements UserDetailsService {
+    private final String USER = "user";
+    private final String ADMIN = "admin";
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         GrantedAuthority userAuthority = new SimpleGrantedAuthority("USER");
         GrantedAuthority adminAuthority = new SimpleGrantedAuthority("ADMIN");
 
-        if ("user".equals(username)) {
-            return new User("user", "user", List.of(userAuthority));
-        } else if ("admin".equals(username)) {
-            return new User("admin","admin",List.of(adminAuthority));
+        if (USER.equals(username)) {
+            return new User(USER, USER, List.of(userAuthority));
+        } else if (ADMIN.equals(username)) {
+            return new User(ADMIN,ADMIN,List.of(adminAuthority));
         }
         throw new UsernameNotFoundException("Указанный пользователь не найден");
     }

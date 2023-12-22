@@ -11,9 +11,9 @@ import java.util.Optional;
 
 public interface SubjectsService {
     @PreAuthorize("hasAuthority('ADMIN') || hasAuthority('USER')")
-    public Optional<Subject> findById(Long id);
+    Optional<Subject> findById(Long id);
     @PreAuthorize("hasAuthority('ADMIN') || hasAuthority('USER')")
-    public List<Subject> findAll();
+    List<Subject> findAll();
     @PreAuthorize("hasAuthority('ADMIN') || hasAuthority('USER')")
-    public void createNewSubject(CreateOrUpdateSubjectDtoRq createOrUpdateSubjectDtoRq) throws Exception;
+    void createNewSubject(CreateOrUpdateSubjectDtoRq createOrUpdateSubjectDtoRq) throws Exception;
 }

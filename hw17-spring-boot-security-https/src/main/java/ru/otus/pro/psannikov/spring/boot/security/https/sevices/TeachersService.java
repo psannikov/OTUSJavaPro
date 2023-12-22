@@ -5,5 +5,5 @@ import ru.otus.pro.psannikov.spring.boot.security.https.entities.Teacher;
 import java.util.Optional;
 
 public interface TeachersService {
-    public Optional<Teacher> findById(Long id);
+    Optional<Teacher> findById(Long id);
 }

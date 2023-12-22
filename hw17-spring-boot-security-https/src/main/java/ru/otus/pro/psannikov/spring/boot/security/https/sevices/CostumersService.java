@@ -5,5 +5,5 @@ import ru.otus.pro.psannikov.spring.boot.security.https.entities.Costumer;
 import java.util.Optional;
 
 public interface CostumersService {
-    public Optional<Costumer> findById(Long id);
+    Optional<Costumer> findById(Long id);
 }

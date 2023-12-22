@@ -7,11 +7,11 @@ import java.util.List;
 
 public interface ExercisesService {
     @PreAuthorize("hasAuthority('ADMIN') || hasAuthority('USER')")
-    public List<ExerciseDtoRq> findAllBySubjectId(Long id);
+    List<ExerciseDtoRq> findAllBySubjectId(Long id);
 
     @PreAuthorize("hasAuthority('ADMIN') || hasAuthority('USER')")
-    public List<ExerciseDtoRq> findAllByCostumerId(Long id);
+    List<ExerciseDtoRq> findAllByCostumerId(Long id);
 
     @PreAuthorize("hasAuthority('ADMIN') || hasAuthority('USER')")
-    public List<ExerciseDtoRq> findAllByTeacherId(Long id);
+    List<ExerciseDtoRq> findAllByTeacherId(Long id);
 }

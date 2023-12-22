@@ -17,7 +17,7 @@ public class ApprovalService {
 
     public Approval getApproval(String name) {
         Optional<ApprovalDtoRq> approvalDtoRq = Optional.ofNullable(approvalRepository.checkDataToApprove(name));
-        Boolean res = (approvalDtoRq.isPresent()) ? false : true;
+        Boolean res = approvalDtoRq.isEmpty();
         return new Approval(res);
     }
 }

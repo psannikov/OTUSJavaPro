@@ -6,5 +6,5 @@ import ru.otus.pro.psannikov.dtos.ApprovalDtoRq;
 
 public interface ApprovalRepository extends ListCrudRepository<ApprovalDtoRq, Long> {
     @Query("select name from subjects s where name=:name")
-    public ApprovalDtoRq checkDataToApprove(String name);
+    ApprovalDtoRq checkDataToApprove(String name);
 }
