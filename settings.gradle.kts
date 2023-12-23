@@ -33,6 +33,9 @@ include("cw28-spring-data-jdbc")
 include("cw29-spring-boot-security")
 include("cw30-spring-boot-security-https:rest-service")
 findProject(":cw30-spring-boot-security-https:rest-service")?.name = "rest-service"
+include("cw31-spring-boot-security-keycloak")
+include("cw31-spring-boot-security-keycloak:rest-service")
+findProject(":cw31-spring-boot-security-keycloak:rest-service")?.name = "rest-service"
 include("hw01-gradle")
 include("hw02-unittest")
 include("hw03-generic")
