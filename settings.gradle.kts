@@ -36,6 +36,9 @@ findProject(":cw30-spring-boot-security-https:rest-service")?.name = "rest-servi
 include("cw31-spring-boot-security-keycloak")
 include("cw31-spring-boot-security-keycloak:rest-service")
 findProject(":cw31-spring-boot-security-keycloak:rest-service")?.name = "rest-service"
+include("cw32-thread")
+include("cw33-executors")
+include("cw34-jmm")
 include("hw01-gradle")
 include("hw02-unittest")
 include("hw03-generic")
