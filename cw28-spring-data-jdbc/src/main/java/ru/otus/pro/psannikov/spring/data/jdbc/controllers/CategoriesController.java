@@ -1,0 +1,57 @@
+package ru.otus.pro.psannikov.spring.data.jdbc.controllers;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+import ru.otus.pro.psannikov.spring.data.jdbc.dtos.CreateOrUpdateCategoryDtoRq;
+import ru.otus.pro.psannikov.spring.data.jdbc.entities.Category;
+import ru.otus.pro.psannikov.spring.data.jdbc.services.CategoriesService;
+import ru.otus.pro.psannikov.spring.data.jdbc.services.impl.CategoriesServiceImpl;
+
+import java.util.List;
+
+@RestController
+@RequestMapping("/api/v1/categories")
+public class CategoriesController {
+    private final CategoriesService categoriesService;
+
+    @Autowired
+    public CategoriesController(CategoriesServiceImpl categoriesService) {
+        this.categoriesService = categoriesService;
+    }
+
+
+    @GetMapping
+    public List<Category> findAll() {
+        return categoriesService.findAll();
+    }
+
+    @GetMapping("/{id}")
+    public Category findById(@PathVariable Long id) {
+        return categoriesService.findById(id);
+    }
+
+    @PostMapping
+    public void createNewCategory(@RequestBody CreateOrUpdateCategoryDtoRq createOrUpdateCategoryDtoRq) {
+        categoriesService.createNewCategory(createOrUpdateCategoryDtoRq);
+    }
+
+    @PutMapping
+    public void updateCategory(@RequestBody CreateOrUpdateCategoryDtoRq createOrUpdateCategoryDtoRq) {
+        categoriesService.updateCategory(createOrUpdateCategoryDtoRq);
+    }
+
+    @DeleteMapping("/{id}")
+    public void deleteById(@PathVariable Long id) {
+        categoriesService.deleteById(id);
+    }
+
+    @GetMapping("/bytitle")
+    public Category findByTitle(@RequestParam String title) {
+        return categoriesService.findByTitle(title);
+    }
+
+    @GetMapping("/bytitlelike")
+    public List<Category> findAllByTitleLike(@RequestParam String title) {
+        return categoriesService.findAllByTitleLike(title);
+    }
+}
