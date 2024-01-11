@@ -8,8 +8,8 @@ public class Main {
     private static final Lock lock = new ReentrantLock();
     private static final Condition possibleToThread1 = lock.newCondition();
     private static final Condition possibleToThread2 = lock.newCondition();
-    public static final String THREAD1NAME = "Thread 1";
-    public static final String THREAD2NAME = "Thread 2";
+    private static final String THREAD1NAME = "Thread 1";
+    private static final String THREAD2NAME = "Thread 2";
     private static boolean firstRun = true;
     private final static int MAXITERATION = 100;
 
@@ -32,11 +32,11 @@ public class Main {
                         possibleToThread2.await();
                     }
                     System.out.print(Thread.currentThread().getName() + " ");
-                    if (Thread.currentThread().getName() == THREAD1NAME) {
+                    if (Thread.currentThread().getName().equals(THREAD1NAME)) {
                         printer1.printNumbers();
                         possibleToThread2.signal();
                         possibleToThread1.await();
-                    } else if (Thread.currentThread().getName() == THREAD2NAME) {
+                    } else if (Thread.currentThread().getName().equals(THREAD2NAME)) {
                         printer2.printNumbers();
                         possibleToThread1.signal();
                         possibleToThread2.await();
