@@ -39,6 +39,7 @@ findProject(":cw31-spring-boot-security-keycloak:rest-service")?.name = "rest-se
 include("cw32-thread")
 include("cw33-executors")
 include("cw34-jmm")
+include("cw35-concurrent-collections")
 include("hw01-gradle")
 include("hw02-unittest")
 include("hw03-generic")
