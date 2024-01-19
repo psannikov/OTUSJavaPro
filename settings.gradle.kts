@@ -8,3 +8,4 @@ include("cw36-multiprocess:rmi")
 findProject(":cw36-multiprocess:rmi")?.name = "rmi"
 include("cw36-multiprocess:grpc")
 findProject(":cw36-multiprocess:grpc")?.name = "grpc"
+include("cw37-nio")
