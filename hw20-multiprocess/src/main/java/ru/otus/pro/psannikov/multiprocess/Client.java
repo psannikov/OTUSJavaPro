@@ -1,28 +1,26 @@
 package ru.otus.pro.psannikov.multiprocess;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
-import java.net.Socket;
+import io.grpc.ManagedChannel;
+import io.grpc.ManagedChannelBuilder;
 
 public class Client {
-    private final LoadBalancer loadBalancer;
+    public final int LIMIT_OF_MESSAGE = 20;
+    public final String LOAD_BALANCER_HOST = "localhost";
+    private final int LOAD_BALANCER_PORT = 8888;
 
-    public Client(LoadBalancer loadBalancer) {
-        this.loadBalancer = loadBalancer;
-    }
+    public void sendMessages() {
+        ManagedChannel channel = ManagedChannelBuilder.forAddress(LOAD_BALANCER_HOST, LOAD_BALANCER_PORT)
+                .usePlaintext()
+                .build();
+        LoadBalancerServiceGrpc.LoadBalancerServiceBlockingStub stub
+                = LoadBalancerServiceGrpc.newBlockingStub(channel);
 
-    public void send() {
-        try {
-            Socket loadBalancerSocket = new Socket("localhost", 8080);
-            PrintWriter output = new PrintWriter(loadBalancerSocket.getOutputStream(), true);
-            BufferedReader input = new BufferedReader(new InputStreamReader(loadBalancerSocket.getInputStream()));
-            output.println("Hello");
-            String response = input.readLine();
-            System.out.println("Response from LoadBalancer: " + response);
-            loadBalancerSocket.close();
-        } catch (Exception e) {
-            e.printStackTrace();
+        for (int i = 0; i < LIMIT_OF_MESSAGE; i++) {
+            LoadBalancerResponse helloResponse = stub.send(LoadBalancerRequest.newBuilder()
+                    .setRequest("Hello World")
+                    .build());
+            System.out.println(helloResponse.getResponse());
         }
+        channel.shutdown();
     }
 }

@@ -1,32 +1,17 @@
 package ru.otus.pro.psannikov.multiprocess;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
-import java.net.Socket;
+import io.grpc.Server;
+import io.grpc.ServerBuilder;
+
+import java.io.IOException;
 
 public class Node {
-    private final String name;
 
-    public Node(String name) {
-        this.name = name;
-    }
-
-    public void processRequest(Socket clientSocket) {
-        try {
-            BufferedReader input = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-
-            PrintWriter output = new PrintWriter(clientSocket.getOutputStream(), true);
-
-            String request = input.readLine();
-
-            String response = "Hello from " + name;
-
-            output.println(response);
-
-            clientSocket.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+    public Node(String nameNode, int port) throws IOException, InterruptedException {
+        Server server = ServerBuilder
+                .forPort(port)
+                .addService(new NodeServiceImpl(nameNode)).build();
+        server.start();
+        server.awaitTermination();
     }
 }
