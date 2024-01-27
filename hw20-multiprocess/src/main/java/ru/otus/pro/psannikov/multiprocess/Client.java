@@ -4,7 +4,7 @@ import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
 
 public class Client {
-    public final int LIMIT_OF_MESSAGE = 20;
+    public final int LIMIT_OF_MESSAGE = 11;
     public final String LOAD_BALANCER_HOST = "localhost";
     private final int LOAD_BALANCER_PORT = 8888;
 

@@ -5,13 +5,14 @@ import io.grpc.ManagedChannelBuilder;
 import io.grpc.stub.StreamObserver;
 
 import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 public class LoadBalancerServiceImpl extends LoadBalancerServiceGrpc.LoadBalancerServiceImplBase {
 
     private int requestCount = 0;
-    private final List<Integer> portList;
+    private final CopyOnWriteArrayList<Integer> portList;
 
-    public LoadBalancerServiceImpl(List<Integer> portList) {
+    public LoadBalancerServiceImpl(CopyOnWriteArrayList<Integer> portList) {
         this.portList = portList;
     }
 

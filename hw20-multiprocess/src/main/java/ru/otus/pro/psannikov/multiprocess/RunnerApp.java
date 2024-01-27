@@ -4,14 +4,15 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class RunnerApp {
-    private final int NODECOUNT = 3;
+    private final int NODECOUNT = 5;
     private int startPortNode = 8889;
 
     public void threadsWork() throws InterruptedException {
-        List<Integer> portList = new ArrayList<>();
+        CopyOnWriteArrayList<Integer> portList = new CopyOnWriteArrayList<>();
         for (int i = 0; i < NODECOUNT; i++) {
             portList.add(startPortNode);
             startPortNode++;
@@ -20,7 +21,7 @@ public class RunnerApp {
         Runnable startNode = () -> {
             try {
                 Node node = new Node("Node " + ThreadLocalRandom.current().nextInt(0, 100), iter.next());
-                Thread.sleep(2000);
+                Thread.sleep(3000);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             } catch (InterruptedException e) {
@@ -42,6 +43,7 @@ public class RunnerApp {
         };
         for (int i = 0; i < NODECOUNT; i++) {
             Thread threadNode = new Thread(startNode);
+            threadNode.setName("Thread№" + i);
             threadNode.start();
         }
         Thread threadLoadBalancer = new Thread(startLoadBalancer);
