@@ -50,6 +50,7 @@ findProject(":cw36-multiprocess:rmi")?.name = "rmi"
 include("cw36-multiprocess:grpc")
 findProject(":cw36-multiprocess:grpc")?.name = "grpc"
 include("cw37-nio")
+include("cw38-rabbit-mq")
 include("cw39-netty")
 include("hw01-gradle")
 include("hw02-unittest")
