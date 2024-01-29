@@ -73,3 +73,4 @@ include("hw17-spring-boot-security-https:approval-service")
 findProject(":hw17-spring-boot-security-https:approval-service")?.name = "approval-service"
 include("hw18-threads")
 include("hw19-concurrent-collections")
+include("hw20-multiprocess")
