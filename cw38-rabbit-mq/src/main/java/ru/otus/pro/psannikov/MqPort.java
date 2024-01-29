@@ -1,4 +1,4 @@
-package ru.otus.pro.psannikov.rabbit.mq;
+package ru.otus.pro.psannikov;
 
 import java.util.List;
 import java.util.UUID;

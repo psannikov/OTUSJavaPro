@@ -1,4 +1,4 @@
-package ru.otus.pro.psannikov.rabbit.mq;
+package ru.otus.pro.psannikov;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

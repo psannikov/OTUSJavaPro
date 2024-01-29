@@ -1,4 +1,4 @@
-package ru.otus.pro.psannikov.rabbit.mq;
+package ru.otus.pro.psannikov;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

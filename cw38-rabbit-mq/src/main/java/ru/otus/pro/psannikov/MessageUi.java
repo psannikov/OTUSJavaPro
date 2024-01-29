@@ -1,4 +1,4 @@
-package ru.otus.pro.psannikov.rabbit.mq;
+package ru.otus.pro.psannikov;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -23,5 +23,5 @@ public interface MessageUi {
   @ResponseStatus(HttpStatus.NO_CONTENT)
   void delete(@PathVariable UUID id);
 
-//  void consume(Message message);
+  void consume(Message message);
 }
