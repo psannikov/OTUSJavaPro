@@ -6,8 +6,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
-import ru.flamexander.reactive.service.dtos.ProductDetailsDto;
-import ru.flamexander.reactive.service.exceptions.AppException;
+import ru.otus.pro.psannikov.reactive.service.dtos.ProductDetailsDto;
+import ru.otus.pro.psannikov.reactive.service.exceptions.AppException;
 
 @Component
 @RequiredArgsConstructor

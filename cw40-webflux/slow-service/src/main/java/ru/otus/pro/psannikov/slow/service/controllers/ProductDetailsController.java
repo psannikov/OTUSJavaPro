@@ -4,7 +4,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import ru.flamexander.product.details.service.dtos.ProductDetailsDto;
+import ru.otus.pro.psannikov.slow.service.dtos.ProductDetailsDto;
 
 @RestController
 @RequestMapping("/api/v1/details")

@@ -3,9 +3,9 @@ package ru.otus.pro.psannikov.reactive.service.services;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
-import ru.flamexander.reactive.service.dtos.ProductDto;
-import ru.flamexander.reactive.service.entities.Product;
-import ru.flamexander.reactive.service.repositories.ProductRepository;
+import ru.otus.pro.psannikov.reactive.service.dtos.ProductDto;
+import ru.otus.pro.psannikov.reactive.service.entities.Product;
+import ru.otus.pro.psannikov.reactive.service.repositories.ProductRepository;
 
 @Service
 public class ProductsService {

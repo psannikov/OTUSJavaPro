@@ -6,8 +6,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
-import ru.flamexander.reactive.service.dtos.ProductDetailsDto;
-import ru.flamexander.reactive.service.services.ProductDetailsService;
+import ru.otus.pro.psannikov.reactive.service.dtos.ProductDetailsDto;
+import ru.otus.pro.psannikov.reactive.service.services.ProductDetailsService;
 
 @RestController
 @RequestMapping("/api/v1/detailed")

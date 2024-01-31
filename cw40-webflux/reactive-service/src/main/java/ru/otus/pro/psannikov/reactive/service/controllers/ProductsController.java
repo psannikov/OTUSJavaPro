@@ -4,9 +4,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
-import ru.flamexander.reactive.service.dtos.ProductDto;
-import ru.flamexander.reactive.service.entities.Product;
-import ru.flamexander.reactive.service.services.ProductsService;
+import ru.otus.pro.psannikov.reactive.service.dtos.ProductDto;
+import ru.otus.pro.psannikov.reactive.service.entities.Product;
+import ru.otus.pro.psannikov.reactive.service.services.ProductsService;
 
 @RestController
 @RequestMapping("/api/v1/products")
