@@ -1,13 +1,13 @@
 package ru.otus.pro.psannikov;
 
-import com.datasrc.model.StringValue;
+import ru.otus.pro.psannikov.model.StringValue;
 import org.apache.kafka.clients.producer.ProducerRecord;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.function.Consumer;
 
-import static com.datasrc.MyProducer.TOPIC_NAME;
+import static ru.otus.pro.psannikov.MyProducer.TOPIC_NAME;
 
 
 public class DataSender {

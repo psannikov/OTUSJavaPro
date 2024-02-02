@@ -1,12 +1,12 @@
 package ru.otus.pro.psannikov;
 
 
-import com.datasrc.config.MyConsumer;
-import com.datasrc.model.StringValue;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.clients.consumer.ConsumerRecords;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import ru.otus.pro.psannikov.config.MyConsumer;
+import ru.otus.pro.psannikov.model.StringValue;
 
 import java.time.Duration;
 import java.util.concurrent.Executors;
@@ -14,7 +14,7 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Consumer;
 
-import static com.datasrc.config.MyConsumer.MAX_POLL_INTERVAL_MS;
+import static ru.otus.pro.psannikov.config.MyConsumer.MAX_POLL_INTERVAL_MS;
 
 
 public class StringValueConsumer {
@@ -31,14 +31,14 @@ public class StringValueConsumer {
     }
 
     public void startConsuming() {
-       // executor.scheduleAtFixedRate(this::poll, 0, MAX_POLL_INTERVAL_MS * 2L, TimeUnit.MILLISECONDS);
+        // executor.scheduleAtFixedRate(this::poll, 0, MAX_POLL_INTERVAL_MS * 2L, TimeUnit.MILLISECONDS);
         executor.scheduleAtFixedRate(this::poll, 0, MAX_POLL_INTERVAL_MS / 2L, TimeUnit.MILLISECONDS);
     }
 
     private void poll() {
         log.info("poll records");
         ConsumerRecords<Long, StringValue> records = myConsumer.getConsumer().poll(timeout);
- //       sleep();
+        //       sleep();
         log.info("polled records.counter:{}", records.count());
         for (ConsumerRecord<Long, StringValue> kafkaRecord : records) {
             try {

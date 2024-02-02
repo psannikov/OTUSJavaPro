@@ -1,8 +1,8 @@
 package ru.otus.pro.psannikov;
 
 
-import com.datasrc.config.MyConsumer;
-import com.datasrc.model.StringValue;
+import ru.otus.pro.psannikov.config.MyConsumer;
+import ru.otus.pro.psannikov.model.StringValue;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.kafka.clients.admin.NewTopic;
 import org.apache.kafka.clients.producer.KafkaProducer;
@@ -18,8 +18,8 @@ import java.util.Properties;
 import java.util.concurrent.*;
 import java.util.stream.LongStream;
 
-import static com.datasrc.JsonSerializer.OBJECT_MAPPER;
-import static com.datasrc.config.MyConsumer.TOPIC_NAME;
+import static ru.otus.pro.psannikov.JsonSerializer.OBJECT_MAPPER;
+import static ru.otus.pro.psannikov.config.MyConsumer.TOPIC_NAME;
 import static org.apache.kafka.clients.CommonClientConfigs.BOOTSTRAP_SERVERS_CONFIG;
 import static org.apache.kafka.clients.CommonClientConfigs.CLIENT_ID_CONFIG;
 import static org.apache.kafka.clients.producer.ProducerConfig.*;

@@ -1,7 +1,10 @@
-import com.datasrc.model.StringValue;
+import ru.otus.pro.psannikov.DataSender;
+import ru.otus.pro.psannikov.ValueSource;
+import ru.otus.pro.psannikov.model.StringValue;
 import org.apache.kafka.clients.admin.NewTopic;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import ru.otus.pro.psannikov.MyProducer;
 
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
@@ -20,7 +23,7 @@ class DataSenderTest {
     }
 
     @Test
-    void dataHandlerTest()  {
+    void dataHandlerTest() {
         //given
         List<StringValue> stringValues = LongStream.range(0, 9).boxed()
                 .map(idx -> new StringValue(idx, "test:" + idx))

@@ -1,6 +1,6 @@
 package ru.otus.pro.psannikov;
 
-import com.datasrc.config.MyConsumer;
+import ru.otus.pro.psannikov.config.MyConsumer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

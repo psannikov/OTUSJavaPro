@@ -1,6 +1,6 @@
 package ru.otus.pro.psannikov;
 
-import com.datasrc.model.StringValue;
+import ru.otus.pro.psannikov.model.StringValue;
 
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;

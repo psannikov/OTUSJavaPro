@@ -1,8 +1,8 @@
 package ru.otus.pro.psannikov.config;
 
 
-import com.datasrc.ConsumerException;
-import com.datasrc.model.StringValue;
+import ru.otus.pro.psannikov.ConsumerException;
+import ru.otus.pro.psannikov.model.StringValue;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
@@ -13,8 +13,12 @@ import java.util.Collections;
 import java.util.Properties;
 import java.util.Random;
 
-import static com.datasrc.config.JsonDeserializer.OBJECT_MAPPER;
-import static com.datasrc.config.JsonDeserializer.TYPE_REFERENCE;
+import static org.apache.kafka.clients.CommonClientConfigs.BOOTSTRAP_SERVERS_CONFIG;
+import static org.apache.kafka.clients.CommonClientConfigs.GROUP_ID_CONFIG;
+import static org.apache.kafka.clients.CommonClientConfigs.GROUP_INSTANCE_ID_CONFIG;
+import static org.apache.kafka.clients.CommonClientConfigs.MAX_POLL_INTERVAL_MS_CONFIG;
+import static ru.otus.pro.psannikov.config.JsonDeserializer.OBJECT_MAPPER;
+import static ru.otus.pro.psannikov.config.JsonDeserializer.TYPE_REFERENCE;
 import static org.apache.kafka.clients.CommonClientConfigs.*;
 import static org.apache.kafka.clients.consumer.ConsumerConfig.*;
 

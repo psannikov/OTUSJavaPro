@@ -10,12 +10,12 @@ repositories {
 }
 
 dependencies {
-    implementation ("org.apache.kafka:kafka-clients")
-    implementation ("ch.qos.logback:logback-classic")
-    implementation ("com.fasterxml.jackson.core:jackson-databind")
-    testImplementation ("org.junit.jupiter:junit-jupiter-engine")
-    testImplementation ("org.assertj:assertj-core")
-    testImplementation ("org.testcontainers:kafka")
+    implementation("org.apache.kafka:kafka-clients:3.6.1")
+    implementation ("ch.qos.logback:logback-classic:1.4.14")
+    implementation("com.fasterxml.jackson.core:jackson-databind:2.16.1")
+    testImplementation("org.junit.jupiter:junit-jupiter-engine:5.10.1")
+    testImplementation("org.assertj:assertj-core:3.25.2")
+    testImplementation("org.testcontainers:kafka:1.19.4")
 }
 
 tasks.test {
