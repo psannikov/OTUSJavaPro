@@ -57,6 +57,11 @@ include("cw40-webflux:reactive-service")
 findProject(":cw40-webflux:reactive-service")?.name = "reactive-service"
 include("cw40-webflux:slow-service")
 findProject(":cw40-webflux:slow-service")?.name = "slow-service"
+include("cw41-kafka")
+include("cw41-kafka:consumer")
+findProject(":cw41-kafka:consumer")?.name = "consumer"
+include("cw41-kafka:producer")
+findProject(":cw41-kafka:producer")?.name = "producer"
 include("hw01-gradle")
 include("hw02-unittest")
 include("hw03-generic")
