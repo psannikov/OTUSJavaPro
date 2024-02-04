@@ -52,6 +52,11 @@ findProject(":cw36-multiprocess:grpc")?.name = "grpc"
 include("cw37-nio")
 include("cw38-rabbit-mq")
 include("cw39-netty")
+include("cw40-webflux")
+include("cw40-webflux:reactive-service")
+findProject(":cw40-webflux:reactive-service")?.name = "reactive-service"
+include("cw40-webflux:slow-service")
+findProject(":cw40-webflux:slow-service")?.name = "slow-service"
 include("hw01-gradle")
 include("hw02-unittest")
 include("hw03-generic")
