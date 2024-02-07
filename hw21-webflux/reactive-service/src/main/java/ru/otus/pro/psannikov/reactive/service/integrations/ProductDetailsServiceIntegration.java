@@ -26,6 +26,7 @@ public class ProductDetailsServiceIntegration {
                         clientResponse -> Mono.error(new AppException("PRODUCT_DETAILS_SERVICE_INTEGRATION_ERROR"))
                 )
                 .bodyToMono(ProductDetailsDto.class)
+                .onErrorResume(AppException.class, ex -> Mono.just(new ProductDetailsDto(id, ex.getMessage())))
                 .log();
     }
 }

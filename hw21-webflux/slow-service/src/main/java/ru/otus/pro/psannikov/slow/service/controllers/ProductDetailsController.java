@@ -14,7 +14,10 @@ public class ProductDetailsController {
         if (id > 100) {
             throw new RuntimeException();
         }
+        if (id % 2 == 0) {
+            throw new IllegalArgumentException("Детальной информации по продукту не обнаружено");
+        }
         Thread.sleep(2500 + (int)(Math.random() * 2500));
-        return new ProductDetailsDto(id, "Product description..");
+        return new ProductDetailsDto(id, "Детальная информация по продукту " + id +" ...");
     }
 }
