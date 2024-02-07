@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+import "google/protobuf/timestamp.proto";
+
+message Message {
+  string chatIdentifier = 1;
+  string membersLast = 2;
+  string belongNumber = 3;
+  google.protobuf.Timestamp sendDate = 4;
+  string text = 5;
+}
+
+message MessageList {
+  repeated Message messages = 1;
+}
