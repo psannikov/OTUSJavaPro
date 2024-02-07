@@ -1,0 +1,16 @@
+syntax = "proto3";
+option java_multiple_files = true;
+package ru.otus.pro.psannikov.message;
+
+message TestRequest {
+    string firstName = 1;
+    string lastName = 2;
+}
+
+message TestResponse {
+    string greeting = 1;
+}
+
+service TestService {
+    rpc test(TestRequest) returns (TestResponse);
+}
