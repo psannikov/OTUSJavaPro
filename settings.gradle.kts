@@ -62,6 +62,7 @@ include("cw41-kafka:consumer")
 findProject(":cw41-kafka:consumer")?.name = "consumer"
 include("cw41-kafka:producer")
 findProject(":cw41-kafka:producer")?.name = "producer"
+include("cw42-ci-cd")
 include("hw01-gradle")
 include("hw02-unittest")
 include("hw03-generic")
