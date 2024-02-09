@@ -1,0 +1,22 @@
+INSERT INTO information_systems ("name", rdbms_type, connection_string) VALUES
+    ('Тестовый стенд Postgres','postgres','jdbc:postgresql://localhost:5432/postgresDB'),
+    ('Тестовый стенд MySql','mysql','jdbc:mysql://localhost:3306/mysqlDB'),
+    ('Тестовый стенд Oracle','oracle','jdbc:oracle:thin:@//localhost:1521/oracleDB');
+INSERT INTO responsible_persons (fio, email) values
+    ('Иванов Иван Иванович', 'ivan@mail.ru'),
+    ('Петров Петр Петрович', 'pert@mail.ru'),
+    ('Сидоров Сидр Сидорович', 'sidr@mail.ru');
+INSERT INTO status (state) values
+    ('Новая задача'),
+    ('Работы запланированы'),
+    ('Пароль сгенерирован'),
+    ('Пароль передан'),
+    ('Пароль обновлен'),
+    ('Работы завершены');
+insert into credentials (information_system_id,login,description,responsible_person_id) values
+    (1, 'user_is_1', 'Первая внешняя система', 1),
+    (1, 'user_is_2', 'Вторая внешняя система', 2),
+    (2, 'user_is_3', 'Третья внешняя система', 3),
+    (2, 'user_is_4', 'Четвертая внешняя система', 2),
+    (2, 'user_is_5', 'Пятая внешняя система', 1),
+    (3, 'user_is_6', 'Шестая внешняя система', 1);
