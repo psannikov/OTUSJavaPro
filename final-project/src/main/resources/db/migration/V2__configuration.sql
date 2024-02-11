@@ -1,12 +1,12 @@
-INSERT INTO information_systems ("name", rdbms_type, connection_string) VALUES
-    ('Тестовый стенд Postgres','postgres','jdbc:postgresql://localhost:5432/postgresDB'),
-    ('Тестовый стенд MySql','mysql','jdbc:mysql://localhost:3306/mysqlDB'),
-    ('Тестовый стенд Oracle','oracle','jdbc:oracle:thin:@//localhost:1521/oracleDB');
+INSERT INTO information_systems ("name", rdbms_type) VALUES
+    ('Тестовый стенд Postgres','postgres'),
+    ('Тестовый стенд MySql','mysql'),
+    ('Тестовый стенд Oracle','oracle');
 INSERT INTO responsible_persons (fio, email) values
     ('Иванов Иван Иванович', 'ivan@mail.ru'),
     ('Петров Петр Петрович', 'pert@mail.ru'),
     ('Сидоров Сидр Сидорович', 'sidr@mail.ru');
-INSERT INTO status (state) values
+INSERT INTO task_status (description) values
     ('Новая задача'),
     ('Работы запланированы'),
     ('Пароль сгенерирован'),

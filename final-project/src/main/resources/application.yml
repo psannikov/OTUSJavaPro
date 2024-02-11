@@ -9,6 +9,10 @@ spring:
     url: jdbc:postgresql://localhost:5432/configDB
     username: usr
     password: pwd
+#  jpa:
+#    properties:
+#      hibernate:
+#        dialect: org.hibernate.dialect.PostgreSQLDialect
 logging:
   level:
     org.springframework.jdbc.core.JdbcTemplate: TRACE
