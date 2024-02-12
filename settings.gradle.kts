@@ -85,3 +85,8 @@ findProject(":hw17-spring-boot-security-https:approval-service")?.name = "approv
 include("hw18-threads")
 include("hw19-concurrent-collections")
 include("hw20-multiprocess")
+include("hw21-webflux")
+include("hw21-webflux:reactive-service")
+findProject(":hw21-webflux:reactive-service")?.name = "reactive-service"
+include("hw21-webflux:slow-service")
+findProject(":hw21-webflux:slow-service")?.name = "slow-service"
