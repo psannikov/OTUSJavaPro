@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import ru.otus.pro.psannikov.password.changer.dtos.CreateOrUpdateResponsiblePersonDtoRq;
 import ru.otus.pro.psannikov.password.changer.entities.ResponsiblePerson;
-import ru.otus.pro.psannikov.password.changer.services.ResponsiblePersonsService;
+import ru.otus.pro.psannikov.password.changer.services.rest.ResponsiblePersonsService;
 
 import java.util.List;
 import java.util.Optional;

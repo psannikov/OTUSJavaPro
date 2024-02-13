@@ -26,8 +26,7 @@ dependencies {
     implementation("ch.qos.logback:logback-classic:1.4.5")
     compileOnly("org.projectlombok:lombok")
     annotationProcessor("org.projectlombok:lombok")
-    testImplementation("org.springframework.boot:spring-boot-starter-test")
-    testImplementation("org.junit.jupiter:junit-jupiter")
+    implementation ("org.springframework.boot:spring-boot-starter-mail")
 }
 
 tasks.test {

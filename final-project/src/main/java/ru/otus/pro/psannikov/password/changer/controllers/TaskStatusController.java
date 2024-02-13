@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import ru.otus.pro.psannikov.password.changer.dtos.CreateOrUpdateTaskStatusDtoRq;
 import ru.otus.pro.psannikov.password.changer.entities.TaskStatus;
-import ru.otus.pro.psannikov.password.changer.services.TaskStatusService;
+import ru.otus.pro.psannikov.password.changer.services.rest.TaskStatusService;
 
 import java.util.List;
 import java.util.Optional;

@@ -1,4 +1,4 @@
-package ru.otus.pro.psannikov.password.changer.services;
+package ru.otus.pro.psannikov.password.changer.services.rest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

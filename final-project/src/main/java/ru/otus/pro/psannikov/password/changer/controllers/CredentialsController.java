@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.*;
 import ru.otus.pro.psannikov.password.changer.dtos.CreateOrUpdateCredentialDtoRq;
 import ru.otus.pro.psannikov.password.changer.dtos.DetailedCredentialsDto;
 import ru.otus.pro.psannikov.password.changer.entities.Credential;
-import ru.otus.pro.psannikov.password.changer.services.CredentialsService;
+import ru.otus.pro.psannikov.password.changer.services.rest.CredentialsService;
 
 import java.util.List;
 import java.util.Optional;
@@ -50,7 +50,7 @@ public class CredentialsController {
         credentialsService.updateCredential(createOrUpdateCredentialDtoRq);
     }
 
-    @PutMapping("/{id}/next")
+    @GetMapping("/{id}/next")
     public void nextStep(@PathVariable Long id) {
         credentialsService.nextStep(id);
     }

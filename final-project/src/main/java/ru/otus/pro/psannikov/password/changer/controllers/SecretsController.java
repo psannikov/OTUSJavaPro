@@ -3,7 +3,7 @@ package ru.otus.pro.psannikov.password.changer.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import ru.otus.pro.psannikov.password.changer.entities.Secret;
-import ru.otus.pro.psannikov.password.changer.services.SecretsService;
+import ru.otus.pro.psannikov.password.changer.services.rest.SecretsService;
 
 import java.util.Optional;
 

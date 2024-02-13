@@ -9,10 +9,17 @@ spring:
     url: jdbc:postgresql://localhost:5432/configDB
     username: usr
     password: pwd
-#  jpa:
-#    properties:
-#      hibernate:
-#        dialect: org.hibernate.dialect.PostgreSQLDialect
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: psannikov87@gmail.com
+    password: xfbwznavqrfqjwdp
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
 logging:
   level:
     org.springframework.jdbc.core.JdbcTemplate: TRACE

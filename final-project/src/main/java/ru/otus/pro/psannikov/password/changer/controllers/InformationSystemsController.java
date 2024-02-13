@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import ru.otus.pro.psannikov.password.changer.dtos.CreateOrUpdateInformationSystemDtoRq;
 import ru.otus.pro.psannikov.password.changer.entities.InformationSystem;
-import ru.otus.pro.psannikov.password.changer.services.InformationSystemsService;
+import ru.otus.pro.psannikov.password.changer.services.rest.InformationSystemsService;
 
 import java.util.List;
 import java.util.Optional;

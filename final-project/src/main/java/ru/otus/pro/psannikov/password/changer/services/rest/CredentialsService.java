@@ -1,4 +1,4 @@
-package ru.otus.pro.psannikov.password.changer.services;
+package ru.otus.pro.psannikov.password.changer.services.rest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -6,6 +6,7 @@ import ru.otus.pro.psannikov.password.changer.dtos.CreateOrUpdateCredentialDtoRq
 import ru.otus.pro.psannikov.password.changer.dtos.DetailedCredentialsDto;
 import ru.otus.pro.psannikov.password.changer.entities.Credential;
 import ru.otus.pro.psannikov.password.changer.repositories.CredentialsRepository;
+import ru.otus.pro.psannikov.password.changer.services.external.EmailSenderService;
 
 import java.util.List;
 import java.util.Optional;
@@ -13,12 +14,12 @@ import java.util.Optional;
 @Service
 public class CredentialsService {
     private final CredentialsRepository credentialsRepository;
-
+    private final EmailSenderService senderService;
     @Autowired
-    public CredentialsService(CredentialsRepository credentialsRepository) {
+    public CredentialsService(CredentialsRepository credentialsRepository, EmailSenderService senderService) {
         this.credentialsRepository = credentialsRepository;
+        this.senderService = senderService;
     }
-
     public Optional<Credential> findById(Long id) {
         return credentialsRepository.findById(id);
     }
@@ -76,7 +77,10 @@ public class CredentialsService {
 //            credential.setId(6L);
 //        }
 //        credentialsRepository.updateStepIdById(credential.getId(), credential.getTaskStatus().getId());
-        credentialsRepository.updateStepIdById(1L, 3L);
+//        credentialsRepository.updateStepIdById(1L, 3L);
+        senderService.sendEmail("psannikov87@gmail.com",
+                "Subject test",
+                "Body test");
     }
 
     public void deleteById(Long id) {
