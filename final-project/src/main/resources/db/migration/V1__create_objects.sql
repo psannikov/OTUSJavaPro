@@ -33,10 +33,37 @@ CREATE TABLE secrets (
     secret varchar(1000) NOT NULL,
     foreign key (credential_id) references credentials (id)
 );
+ALTER TABLE public.secrets ADD CONSTRAINT secrets_unique UNIQUE (credential_id);
+create table information_system_symbol_exclude (information_system varchar(1000), symbol varchar(1));
+CREATE OR REPLACE FUNCTION pwd_gen(len INT, var_infromation_system VARCHAR)
+RETURNS VARCHAR AS $$
+DECLARE
+    available_chars VARCHAR := '';
+    generated_pwd VARCHAR := '';
+    excluded_symbols CURSOR FOR SELECT symbol FROM information_system_symbol_exclude WHERE information_system = var_infromation_system;
+    excluded_symbol VARCHAR;
+BEGIN
+    -- Формируем строку с доступными символами для пароля
+    available_chars := '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz~!@#$%^&*()-=_+[]{}|;:,.<>?';
+
+    -- Исключаем символы, указанные в таблице information_system_symbol_exclude
+    FOR excluded_symbol IN excluded_symbols LOOP
+        available_chars := REPLACE(available_chars, excluded_symbol, '');
+    END LOOP;
+
+    -- Генерируем случайный пароль
+    SELECT string_agg(SUBSTRING(available_chars, (random() * LENGTH(available_chars) + 1)::INT, 1), '')
+    INTO generated_pwd
+    FROM generate_series(1, len);
+
+    RETURN generated_pwd;
+END;
+$$ LANGUAGE plpgsql;
+
 create view detail_credentials as
 select c.id,c.login ,c.description detail_credential_description, i_s.name information_systems_name,i_s.rdbms_type ,r_p.fio ,r_p.email ,t_s.description status_description,s.secret
 from credentials c
 join information_systems i_s on c.information_system_id = i_s.id
 join responsible_persons r_p on c.responsible_person_id = r_p.id
 join task_status t_s on c.task_status_id = t_s.id
-left join secrets s on c.id = s.credential_id
+left join secrets s on c.id = s.credential_id;

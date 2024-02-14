@@ -1,7 +1,9 @@
 package ru.otus.pro.psannikov.password.changer.repositories;
 
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.ListCrudRepository;
+import org.springframework.transaction.annotation.Transactional;
 import ru.otus.pro.psannikov.password.changer.dtos.DetailedCredentialsDto;
 import ru.otus.pro.psannikov.password.changer.entities.Credential;
 
@@ -11,6 +13,4 @@ public interface CredentialsRepository extends ListCrudRepository<Credential, Lo
     Optional<Credential> findByLogin(String login);
     @Query(value = "select * from detail_credentials where id = :id", nativeQuery = true)
     Optional<DetailedCredentialsDto> findDetailedCredentialById(Long id);
-    @Query(value = "update credentials set task_status_id = :task_status_id where id = :id", nativeQuery = true)
-    void updateStepIdById(Long id, Long task_status_id);
 }

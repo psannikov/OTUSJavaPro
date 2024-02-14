@@ -27,7 +27,7 @@ dependencies {
     compileOnly("org.projectlombok:lombok")
     annotationProcessor("org.projectlombok:lombok")
     implementation ("org.springframework.boot:spring-boot-starter-mail")
-    implementation("org.telegram:telegrambots:6.9.7.0")
+//    implementation("org.telegram:telegrambots:6.9.7.0")
 }
 
 tasks.test {
