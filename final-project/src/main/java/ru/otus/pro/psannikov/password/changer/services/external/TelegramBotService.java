@@ -1,35 +1,37 @@
 package ru.otus.pro.psannikov.password.changer.services.external;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
+import ru.otus.pro.psannikov.password.changer.configure.BotConfig;
 
 @Service
 public class TelegramBotService extends TelegramLongPollingBot {
-    //TODO переделать на чтение параметров из конфига
-    String botName = "PasswordChangeHelperBot";
-    String token = "6975911365:AAHUin1Ghglw3w-Nz8DTGbvGmPYgSOkaUDM";
-    long chatId = 260406846L;
-    public static final String BOT_MESSAGE_TEXT = "Kakojto tekst";
+    private final BotConfig config;
 
+    @Autowired
+    public TelegramBotService(BotConfig config) {
+        this.config = config;
+    }
 
     @Override
     public String getBotUsername() {
-        return botName;
+        return config.getBotName();
     }
 
     @Override
     public String getBotToken() {
-        return token;
+        return config.getToken();
     }
 
     @Override
     public void onUpdateReceived(Update update) {
         SendMessage message = new SendMessage();
-        message.setChatId(chatId);
-        message.setText(BOT_MESSAGE_TEXT);
+        message.setChatId(config.getChatId());
+        message.setText(config.getBotMessageText());
         try {
             execute(message);
         } catch (TelegramApiException e) {
