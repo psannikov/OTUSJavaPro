@@ -2,12 +2,14 @@ package ru.otus.pro.psannikov.password.changer.services.rest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.telegram.telegrambots.meta.api.objects.Update;
 import ru.otus.pro.psannikov.password.changer.dtos.CreateOrUpdateCredentialDtoRq;
 import ru.otus.pro.psannikov.password.changer.dtos.DetailedCredentialsDto;
 import ru.otus.pro.psannikov.password.changer.entities.Credential;
 import ru.otus.pro.psannikov.password.changer.repositories.CredentialsRepository;
 import ru.otus.pro.psannikov.password.changer.repositories.SecretsRepository;
 import ru.otus.pro.psannikov.password.changer.services.external.EmailSenderService;
+import ru.otus.pro.psannikov.password.changer.services.external.TelegramBotService;
 
 import java.util.List;
 import java.util.Optional;
@@ -18,13 +20,15 @@ public class CredentialsService {
     private final SecretsRepository secretsRepository;
     private final EmailSenderService senderService;
     private final TaskStatusService taskStatusService;
+    private final TelegramBotService telegramBotService;
 
     @Autowired
-    public CredentialsService(CredentialsRepository credentialsRepository, SecretsRepository secretsRepository, EmailSenderService senderService, TaskStatusService taskStatusService) {
+    public CredentialsService(CredentialsRepository credentialsRepository, SecretsRepository secretsRepository, EmailSenderService senderService, TaskStatusService taskStatusService, TelegramBotService telegramBotService) {
         this.credentialsRepository = credentialsRepository;
         this.secretsRepository = secretsRepository;
         this.senderService = senderService;
         this.taskStatusService = taskStatusService;
+        this.telegramBotService = telegramBotService;
     }
 
     public Optional<Credential> findById(Long id) {
@@ -87,6 +91,7 @@ public class CredentialsService {
             credential.setTaskStatus(taskStatusService.findById(5L).get());
         } else if (credential.getTaskStatus().getId().equals(5L)) {
             //TODO Реализация уведомления о завершении работ по смене пароля через telegram
+            telegramBotService.onUpdateReceived(new Update());
             secretsRepository.deleteByCredentialId(credential.getId());
             credential.setTaskStatus(taskStatusService.findById(6L).get());
         }

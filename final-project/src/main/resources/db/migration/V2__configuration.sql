@@ -3,9 +3,9 @@ INSERT INTO information_systems ("name", rdbms_type) VALUES
     ('Тестовый стенд MySql','mysql'),
     ('Тестовый стенд Oracle','oracle');
 INSERT INTO responsible_persons (fio, email) values
-    ('Иванов Иван Иванович', 'ivan@mail.ru'),
-    ('Петров Петр Петрович', 'pert@mail.ru'),
-    ('Сидоров Сидр Сидорович', 'sidr@mail.ru');
+    ('Иванов Иван Иванович', 'psannikov87@gmail.com'),
+    ('Петров Петр Петрович', 'psannikov87@gmail.com'),
+    ('Сидоров Сидр Сидорович', 'psannikov87@gmail.com');
 INSERT INTO task_status (description) values
     ('Новая задача'),
     ('Работы запланированы'),
