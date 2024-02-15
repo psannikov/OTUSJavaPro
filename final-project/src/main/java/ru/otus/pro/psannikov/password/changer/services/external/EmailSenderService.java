@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 public class EmailSenderService {
     @Autowired
     private JavaMailSender mailSender;
+    //TODO переделать отправителя на чтение из параметров боди должен собираться из шаблона
     public void sendEmail(String toEmail, String subject, String body) {
         SimpleMailMessage message = new SimpleMailMessage();
         message.setFrom("psannikov87@gmail.com");

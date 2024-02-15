@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name="credentials")
+@Table(name = "credentials")
 public class Credential {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,7 +17,7 @@ public class Credential {
     private Long id;
     @Column(name = "login")
     private String login;
-    @Column(name="description")
+    @Column(name = "description")
     private String description;
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "information_system_id", unique = true, nullable = false)

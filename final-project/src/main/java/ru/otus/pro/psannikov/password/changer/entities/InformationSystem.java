@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name="information_systems")
+@Table(name = "information_systems")
 public class InformationSystem {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,6 +17,6 @@ public class InformationSystem {
     private Long id;
     @Column(name = "name")
     private String name;
-    @Column(name="rdbms_type")
+    @Column(name = "rdbms_type")
     private String rdbmsType;
 }

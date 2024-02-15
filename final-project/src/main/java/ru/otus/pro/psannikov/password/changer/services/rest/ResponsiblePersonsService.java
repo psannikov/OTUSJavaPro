@@ -8,35 +8,43 @@ import ru.otus.pro.psannikov.password.changer.repositories.ResponsiblePersonsRep
 
 import java.util.List;
 import java.util.Optional;
+
 @Service
 public class ResponsiblePersonsService {
     private final ResponsiblePersonsRepository responsiblePersonsRepository;
+
     @Autowired
     public ResponsiblePersonsService(ResponsiblePersonsRepository responsiblePersonsRepository) {
         this.responsiblePersonsRepository = responsiblePersonsRepository;
     }
+
     public Optional<ResponsiblePerson> findById(Long id) {
         return responsiblePersonsRepository.findById(id);
     }
-    public Optional<ResponsiblePerson> findByFio (String fio) {
+
+    public Optional<ResponsiblePerson> findByFio(String fio) {
         return responsiblePersonsRepository.findByFio(fio);
     }
+
     public List<ResponsiblePerson> findAll() {
         return responsiblePersonsRepository.findAll();
     }
+
     public void createNewResponsiblePerson(CreateOrUpdateResponsiblePersonDtoRq createOrUpdateResponsiblePersonDtoRq) {
         ResponsiblePerson newResponsiblePerson = new ResponsiblePerson(createOrUpdateResponsiblePersonDtoRq.getId(),
                 createOrUpdateResponsiblePersonDtoRq.getFio(),
                 createOrUpdateResponsiblePersonDtoRq.getEmail());
         responsiblePersonsRepository.save(newResponsiblePerson);
     }
+
     public void updateResponsiblePerson(CreateOrUpdateResponsiblePersonDtoRq createOrUpdateResponsiblePersonDtoRq) {
         ResponsiblePerson newResponsiblePerson = new ResponsiblePerson(createOrUpdateResponsiblePersonDtoRq.getId(),
                 createOrUpdateResponsiblePersonDtoRq.getFio(),
                 createOrUpdateResponsiblePersonDtoRq.getEmail());
         responsiblePersonsRepository.save(newResponsiblePerson);
     }
-    public void deleteById (Long id) {
+
+    public void deleteById(Long id) {
         responsiblePersonsRepository.deleteById(id);
     }
 }

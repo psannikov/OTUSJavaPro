@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name="responsible_persons")
+@Table(name = "responsible_persons")
 public class ResponsiblePerson {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,6 +17,6 @@ public class ResponsiblePerson {
     private Long id;
     @Column(name = "fio")
     private String fio;
-    @Column(name="email")
+    @Column(name = "email")
     private String email;
 }

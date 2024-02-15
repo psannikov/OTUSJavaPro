@@ -11,6 +11,7 @@ public interface SecretsRepository extends ListCrudRepository<Secret, Long> {
     @Modifying
     @Query(value = "delete from secrets where credential_id = :credential_id", nativeQuery = true)
     void deleteByCredentialId(Long credential_id);
+
     @Transactional
     @Modifying
     @Query(value = "insert into secrets (credential_id,secret) values (:id,pwd_gen(20,:information_system))", nativeQuery = true)

@@ -16,6 +16,7 @@ import java.util.Optional;
 
 @Service
 public class CredentialsService {
+    private final String SUBJECT = "Подтверждение готовности проведения работ";
     private final CredentialsRepository credentialsRepository;
     private final SecretsRepository secretsRepository;
     private final EmailSenderService senderService;
@@ -74,8 +75,7 @@ public class CredentialsService {
         if (credential.getTaskStatus().getId().equals(1L)) {
             //TODO сделать письмо через шаблонизатор
             senderService.sendEmail(credential.getResponsiblePerson().getEmail(),
-                    "Подтверждение готовности проведения работ",
-                    credential.getResponsiblePerson().getFio() + " в вашей зоне отвествнности находится информационная система" +
+                    SUBJECT,credential.getResponsiblePerson().getFio() + " в вашей зоне отвествнности находится информационная система" +
                             credential.getDescription() + ", планируются работы по обновлению реквизитов доступа к учетной записи " +
                             credential.getLogin() + ", прошу подтвердить готовность к проведению работ");
             credential.setTaskStatus(taskStatusService.findById(2L).get());
@@ -90,7 +90,6 @@ public class CredentialsService {
             //TODO Реализация обновления пароля
             credential.setTaskStatus(taskStatusService.findById(5L).get());
         } else if (credential.getTaskStatus().getId().equals(5L)) {
-            //TODO Реализация уведомления о завершении работ по смене пароля через telegram
             telegramBotService.onUpdateReceived(new Update());
             secretsRepository.deleteByCredentialId(credential.getId());
             credential.setTaskStatus(taskStatusService.findById(6L).get());
