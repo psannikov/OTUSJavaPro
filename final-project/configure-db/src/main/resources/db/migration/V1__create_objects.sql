@@ -30,7 +30,7 @@ excluded_symbol varchar;
 
 begin
 -- формируем строку с доступными символами для пароля
-available_chars := '0123456789abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz~!@#$%^&*()-=_+[]{}|;:,.<>?';
+available_chars := '0123456789abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz~!@()-=_+';
 -- исключаем символы, указанные в таблице information_system_symbol_exclude
     for excluded_symbol in excluded_symbols loop
         available_chars := replace(available_chars,excluded_symbol,'');
