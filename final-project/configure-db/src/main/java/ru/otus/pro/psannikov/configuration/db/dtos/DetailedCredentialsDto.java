@@ -10,7 +10,7 @@ import lombok.Setter;
 public class DetailedCredentialsDto {
     private Long id;
     private String login;
-    private String credential_description;
+    private String detail_credential_description;
     private String information_systems_name;
     private String rdbms_type;
     private String fio;

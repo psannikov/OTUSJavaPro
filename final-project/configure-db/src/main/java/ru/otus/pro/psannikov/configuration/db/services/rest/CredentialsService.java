@@ -84,39 +84,39 @@ public class CredentialsService {
 
     public void nextStep(Long id) {
         Optional<Credential> optionalCredential = credentialsRepository.findById(id);
-        Credential credential = optionalCredential.get();
-        if (credential.getTaskStatus().getId().equals(1L)) {
-            Context context = new Context();
-            context.setVariable("fio", credential.getResponsiblePerson().getFio());
-            context.setVariable("description", credential.getDescription());
-            context.setVariable("login", credential.getLogin());
-            senderService.sendEmail(credential.getResponsiblePerson().getEmail(),subject, context);
-            credential.setTaskStatus(taskStatusService.findById(2L).get());
-        } else if (credential.getTaskStatus().getId().equals(2L)) {
-            secretsRepository.insertNewSecret(credential.getId(), credential.getDescription());
-            credential.setTaskStatus(taskStatusService.findById(3L).get());
-        } else if (credential.getTaskStatus().getId().equals(3L)) {
-            //TODO тут будет реализация вызова API секретной передачи конф информации,
-            // это я буду делать уже после завершения проекта, пока просто двигаем статус
-            credential.setTaskStatus(taskStatusService.findById(4L).get());
-        } else if (credential.getTaskStatus().getId().equals(4L)) {
-            HttpHeaders headers = new HttpHeaders();
-            HttpEntity requestEntity = new HttpEntity(headers);
-            String pattern = credential.getInformationSystem().getUrl();
-            String url = MessageFormat.format(pattern,
-                    credential.getLogin(),
-                    credentialsRepository.findDetailedCredentialById(credential.getId()).get().getSecret());
-            ResponseEntity<String> responseEntity = restTemplate.exchange(url, HttpMethod.GET, requestEntity, String.class);
-            String responseBody = responseEntity.getBody();
-            //TODO заменить на log4j
-            System.out.println(responseBody);
-            credential.setTaskStatus(taskStatusService.findById(5L).get());
-        } else if (credential.getTaskStatus().getId().equals(5L)) {
-            telegramBotService.onUpdateReceived(new Update());
-            secretsRepository.deleteByCredentialId(credential.getId());
-            credential.setTaskStatus(taskStatusService.findById(6L).get());
+        if (optionalCredential.isPresent()) {
+            Credential credential = optionalCredential.get();
+            if (credential.getTaskStatus().getId().equals(1L)) {
+                Context context = new Context();
+                context.setVariable("fio", credential.getResponsiblePerson().getFio());
+                context.setVariable("description", credential.getDescription());
+                context.setVariable("login", credential.getLogin());
+                senderService.sendEmail(credential.getResponsiblePerson().getEmail(), subject, context);
+                credential.setTaskStatus(taskStatusService.findById(2L).get());
+            } else if (credential.getTaskStatus().getId().equals(2L)) {
+                secretsRepository.insertNewSecret(credential.getId(), credential.getDescription());
+                credential.setTaskStatus(taskStatusService.findById(3L).get());
+            } else if (credential.getTaskStatus().getId().equals(3L)) {
+                //TODO тут будет реализация вызова API секретной передачи конф информации,
+                // это я буду делать уже после завершения проекта, пока просто двигаем статус
+                credential.setTaskStatus(taskStatusService.findById(4L).get());
+            } else if (credential.getTaskStatus().getId().equals(4L)) {
+                HttpHeaders headers = new HttpHeaders();
+                HttpEntity requestEntity = new HttpEntity(headers);
+                String pattern = credential.getInformationSystem().getUrl();
+                String url = MessageFormat.format(pattern,
+                        credential.getLogin(),
+                        secretsRepository.findByCredentialId(credential.getId()).get());
+                ResponseEntity<String> responseEntity = restTemplate.exchange(url, HttpMethod.GET, requestEntity, String.class);
+                String responseBody = responseEntity.getBody();
+                credential.setTaskStatus(taskStatusService.findById(5L).get());
+            } else if (credential.getTaskStatus().getId().equals(5L)) {
+                telegramBotService.onUpdateReceived(new Update());
+                secretsRepository.deleteByCredentialId(credential.getId());
+                credential.setTaskStatus(taskStatusService.findById(6L).get());
+            }
+            credentialsRepository.save(credential);
         }
-        credentialsRepository.save(credential);
     }
 
     public void deleteById(Long id) {
