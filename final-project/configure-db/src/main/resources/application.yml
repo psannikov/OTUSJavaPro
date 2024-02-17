@@ -1,0 +1,36 @@
+#Реализовать хранение креденшелов в переменных окружения
+server:
+  port: 8189
+  servlet:
+    context-path: /password_changer
+spring:
+  datasource:
+      platform: postgres
+      driverClassName: org.postgresql.Driver
+      url: jdbc:postgresql://localhost:5432/configDB
+      username: usr
+      password: pwd
+  jpa:
+    show-sql: true
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: psannikov87@gmail.com
+    password: xfbwznavqrfqjwdp
+    subject: Подтверждение готовности проведения работ
+    template: emailTemplate
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+logging:
+  level:
+    org.springframework.jdbc.core.JdbcTemplate: TRACE
+telegram:
+  bot:
+    botUsername: PasswordChangeHelperBot
+    token: 6780279474:AAEsbJnYZ9sSoTmmI1EKI2bdDhar_-1c1nI
+    chatId: otusFinalProject
+    botMessageText: Работы по обновлению пароля УЗ в БД завершены
