@@ -1,1 +1,1 @@
-docker run --rm --name configDB -e POSTGRES_PASSWORD=pwd -e POSTGRES_USER=usr -e POSTGRES_DB=configDB -p 5432:5432 postgres
+docker run --rm --name configDB -e POSTGRES_PASSWORD=pwd -e POSTGRES_USER=usr -e POSTGRES_DB=configDB -e POSTGRES_INITDB_ARGS='--encoding=UTF-8' -p 5432:5432 postgres
