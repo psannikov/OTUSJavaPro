@@ -1,0 +1,54 @@
+server:
+  port: 8189
+  servlet:
+    context-path: /password_changer
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/configDB
+    username: ${CONFIGURATION_DB_USERNAME}
+    password: ${CONFIGURATION_DB_PASSWORD}
+    driver-class-name: org.postgresql.Driver
+  # Data Source 1
+  otherdatasource:
+    db1:
+      url: jdbc:postgresql://localhost:5433/target
+      username: usr
+      password: psw
+      driver-class-name: org.postgresql.Driver
+  # Data Source 2
+    db2:
+      url: jdbc:oracle:thin:@//localhost:1521/xe
+      username: system
+      password: oracle
+      driver-class-name: oracle.jdbc.OracleDriver
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+    show-sql: true
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: ${EMAIL_USERNAME}
+    password: ${EMAIL_PASSWORD}
+    subject: Подтверждение готовности проведения работ
+    template: emailTemplate
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+logging:
+  level:
+    org:
+      springframework:
+        jdbc:
+          core:
+            JdbcTemplate: TRACE
+telegram:
+  bot:
+    botUsername: ${BOT_USERNAME}
+    token: ${BOT_TOKEN}
+    chatId: ${BOT_CHAT_ID}
+    botMessageText: Работы по обновлению пароля УЗ в БД завершены
