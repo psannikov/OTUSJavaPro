@@ -8,19 +8,6 @@ spring:
     username: ${CONFIGURATION_DB_USERNAME}
     password: ${CONFIGURATION_DB_PASSWORD}
     driver-class-name: org.postgresql.Driver
-  # Data Source 1
-  otherdatasource:
-    db1:
-      url: jdbc:postgresql://localhost:5433/target
-      username: usr
-      password: psw
-      driver-class-name: org.postgresql.Driver
-  # Data Source 2
-    db2:
-      url: jdbc:oracle:thin:@//localhost:1521/xe
-      username: system
-      password: oracle
-      driver-class-name: oracle.jdbc.OracleDriver
   jpa:
     properties:
       hibernate:
@@ -52,3 +39,15 @@ telegram:
     token: ${BOT_TOKEN}
     chatId: ${BOT_CHAT_ID}
     botMessageText: Работы по обновлению пароля УЗ в БД завершены
+app:
+  datasources:
+    db1:
+      url: jdbc:postgresql://localhost:5433/target
+      username: ${TARGET_DB1_USERNAME}
+      password: ${TARGET_DB1_PASSWORD}
+      driver-class-name: org.postgresql.Driver
+    db2:
+      url: jdbc:oracle:thin:@//localhost:1521/xe
+      username: ${TARGET_DB2_USERNAME}
+      password: ${TARGET_DB2_PASSWORD}
+      driver-class-name: oracle.jdbc.OracleDriver

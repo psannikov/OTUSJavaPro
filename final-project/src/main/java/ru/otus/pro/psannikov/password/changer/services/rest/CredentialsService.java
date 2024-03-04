@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.thymeleaf.context.Context;
 import ru.otus.pro.psannikov.password.changer.dtos.CreateOrUpdateCredentialDtoRq;
@@ -33,18 +32,14 @@ public class CredentialsService {
     private final EmailSenderService senderService;
     private final TaskStatusService taskStatusService;
     private final TelegramBotService telegramBotService;
-    private final RestTemplate restTemplate;
 
     @Autowired
-    public CredentialsService(CredentialsRepository credentialsRepository, SecretsRepository secretsRepository, EmailSenderService senderService, TaskStatusService taskStatusService, TelegramBotService telegramBotService
-            , RestTemplate restTemplate
-    ) {
+    public CredentialsService(CredentialsRepository credentialsRepository, SecretsRepository secretsRepository, EmailSenderService senderService, TaskStatusService taskStatusService, TelegramBotService telegramBotService) {
         this.credentialsRepository = credentialsRepository;
         this.secretsRepository = secretsRepository;
         this.senderService = senderService;
         this.taskStatusService = taskStatusService;
         this.telegramBotService = telegramBotService;
-        this.restTemplate = restTemplate;
     }
 
     public Optional<Credential> findById(Long id) {
@@ -88,7 +83,6 @@ public class CredentialsService {
 
 
         Optional<Credential> optionalCredential = credentialsRepository.findById(id);
-        System.out.println("Прошли раз");
         if (optionalCredential.isPresent()) {
             Credential credential = optionalCredential.get();
             if (credential.getTaskStatus().getId().equals(1L)) {
