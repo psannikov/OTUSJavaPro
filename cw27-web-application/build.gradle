@@ -1,0 +1,72 @@
+plugins {
+    id 'java'
+    id "org.springframework.boot" version "3.0.6"
+    id "io.spring.dependency-management" version "1.0.8.RELEASE"
+    id "org.openapi.generator" version "7.0.0-beta"
+}
+
+group = 'ru.otus.pro.psannikov'
+version = 'unspecified'
+
+apply plugin: "java"
+apply plugin: "io.spring.dependency-management"
+
+java {
+    sourceCompatibility = '17'
+}
+
+configurations {
+    compile.exclude module: "spring-boot-starter-tomcat"
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
+sourceSets {
+    main {
+        java {
+            srcDir "src"
+        }
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+def swaggerVersion = '2.1.0'
+def springBootVersion = "3.0.6"
+
+dependencies {
+//    implementation("org.springframework.boot:spring-boot-starter-data-jpa:${springBootVersion}")
+    implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:${swaggerVersion}")
+    implementation("org.springframework.boot:spring-boot-starter-undertow")
+    implementation("org.springframework.boot:spring-boot-starter-web") {
+        exclude module: 'spring-boot-starter-tomcat'
+    }
+
+    compileOnly("org.projectlombok:lombok")
+    annotationProcessor("org.projectlombok:lombok")
+
+//    runtimeOnly("org.postgresql:postgresql:42.5.4")
+}
+
+openApiGenerate {
+    generatorName = "spring"
+    inputSpec = "$rootDir/cw27-web-application/src/main/resources/openapi.yml".toString()
+    outputDir = "$buildDir/gens".toString()
+    apiPackage = "ru.otus.pro.psannikov.webapp.controllers"
+    invokerPackage = "ru.otus.pro.psannikov.webapp"
+    modelPackage = "ru.otus.pro.psannikov.webapp.models"
+    configOptions = [
+            dateLibrary: "java8",
+            additionalModelTypeAnnotations: "@lombok.Data;@lombok.Builder;@lombok.NoArgsConstructor;@lombok.AllArgsConstructor",
+            interfaceOnly: 'true',
+            skipDefaultInterface: 'true'
+    ]
+    globalProperties = [
+            apis: ""
+    ]
+}
+
+compileJava.dependsOn tasks.openApiGenerate
